@@ -1,0 +1,13 @@
+name: game
+version: 0.1.0
+
+authors:
+  - Matt Swieboda <mswiebod@gmail.com>
+
+crystal: 0.33.0
+
+license: MIT
+
+dependencies:
+  cray:
+    github: mswieboda/cray
