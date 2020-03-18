@@ -9,8 +9,8 @@ class Shapes < Game
     @rectangle = Rectangle.new(
       x: 30,
       y: 100,
-      width: 100,
-      height: 100
+      width: 50,
+      height: 50
     )
 
     @pixels = [
@@ -35,6 +35,8 @@ class Shapes < Game
         end_y: 125
       ),
     ]
+
+    @circle = Circle.new(x: 300, y: 125, radius: 25)
   end
 
   def update
@@ -46,6 +48,8 @@ class Shapes < Game
     @pixels.each(&.draw)
 
     @lines.each(&.draw)
+
+    @circle.draw
   end
 end
 
