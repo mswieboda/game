@@ -6,12 +6,21 @@ class Shapes < Game
   def initialize
     super(name: "Shapes")
 
-    @rectangle = Rectangle.new(
-      x: 30,
-      y: 100,
-      width: 50,
-      height: 50
-    )
+    @rectangles = [
+      Rectangle.new(
+        x: 30,
+        y: 100,
+        width: 60,
+        height: 60,
+        filled: false
+      ),
+      Rectangle.new(
+        x: 35,
+        y: 105,
+        width: 50,
+        height: 50,
+      ),
+    ]
 
     @pixels = [
       Pixel.new(x: 150, y: 125),
@@ -36,20 +45,23 @@ class Shapes < Game
       ),
     ]
 
-    @circle = Circle.new(x: 300, y: 125, radius: 25)
+    @circles = [
+      Circle.new(x: 300, y: 130, radius: 30, filled: false),
+      Circle.new(x: 300, y: 130, radius: 25),
+    ]
   end
 
   def update
   end
 
   def draw
-    @rectangle.draw
+    @rectangles.each(&.draw)
 
     @pixels.each(&.draw)
 
     @lines.each(&.draw)
 
-    @circle.draw
+    @circles.each(&.draw)
   end
 end
 
