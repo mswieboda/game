@@ -20,6 +20,21 @@ class Shapes < Game
       Pixel.new(x: 150, y: 135),
       Pixel.new(x: 160, y: 135),
     ]
+
+    @lines = [
+      Line.new(
+        start_x: 200,
+        start_y: 125,
+        end_x: 210,
+        end_y: 135
+      ),
+      Line.new(
+        start_x: 200,
+        start_y: 135,
+        end_x: 210,
+        end_y: 125
+      ),
+    ]
   end
 
   def update
@@ -29,6 +44,8 @@ class Shapes < Game
     @rectangle.draw
 
     @pixels.each(&.draw)
+
+    @lines.each(&.draw)
   end
 end
 
