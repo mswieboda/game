@@ -5,6 +5,7 @@ class Game
   getter name : String
   getter target_fps : Int32
   getter initial_background_color : LibRay::Color
+  getter? fullscreen : Bool
   getter? resizeable : Bool
   getter? audio : Bool
   getter? debug : Bool
@@ -13,6 +14,8 @@ class Game
   getter frame_time : Float32
 
   NAME = "Game"
+
+  FULLSCREEN = false
 
   SCREEN_WIDTH  = 1280
   SCREEN_HEIGHT =  768
@@ -30,6 +33,7 @@ class Game
 
   def initialize(
     @name = NAME,
+    @fullscreen = FULLSCREEN,
     @screen_width = SCREEN_WIDTH,
     @screen_height = SCREEN_HEIGHT,
     @target_fps = TARGET_FPS,
@@ -52,6 +56,7 @@ class Game
     LibRay.set_config_flags(LibRay::FLAG_WINDOW_RESIZABLE) if resizeable?
 
     LibRay.init_window(@screen_width, @screen_height, name)
+    LibRay.toggle_fullscreen if fullscreen?
     LibRay.set_target_fps(target_fps)
     LibRay.init_audio_device if audio?
 
