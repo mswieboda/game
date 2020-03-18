@@ -1,5 +1,7 @@
 require "cray"
-require "./game/*"
+
+# require "./game/shapes/shape.cr"
+require "./game/**"
 
 class Game
   getter name : String
