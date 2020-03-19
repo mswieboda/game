@@ -1,6 +1,7 @@
 *.DS_Store
 /docs/
 /lib/
+/lib_ext/
 /bin/
 /build/
 /.shards/
