@@ -2,6 +2,7 @@
 
 Game wrapper library internally using [cray](http://github.com/mswieboda/cray) ([RayLib](http://raylib.com) bindings to Crystal).
 
+
 ## Installation
 
 1. Add the dependency to your `shard.yml`:
@@ -13,6 +14,7 @@ Game wrapper library internally using [cray](http://github.com/mswieboda/cray) (
    ```
 
 2. Run `shards install`
+
 
 ## Usage
 
@@ -58,27 +60,44 @@ def draw
 end
 ```
 
+Note: Since many features are currently WIP, in the meantime (and afterwards), interacting with `LibRay` (available via [cray](http://github.com/mswieboda/cray) directly is a valid option.
+
 
 ## Development
 
-- [x] Game (core/window)
-  - [x] basic window: title, size, fullscreen
-  - [x] basic setup: fps, audio
+- [x] Game (core)
+  - [x] basic window: title, size, fullscreen (moving to Window)
+  - [x] basic setup: FPS, audio
   - [x] basic game loop: running? frame time, update, draw wrapper, draw
+  - [ ] drawing mode
   - [ ] sprite loading
+- [ ] Window
+  - [ ] Monitor
+  - [ ] Clipboard
+  - [ ] Cursor
+- [ ] Input
+  - [ ] Keys
+  - [ ] Mouse
+  - [ ] Gamepad
+  - [ ] Touch
+- [ ] Camera
+  - [ ] Viewport
+- [ ] Color
+- [ ] Vectors/Position/Point
+  - [ ] Vector
+  - [ ] Vector3D
 - [x] Shapes
-  - Classes:
-    - [x] Pixel
-    - [x] Line
-    - [x] Circle
-    - [x] Ellipse
-    - [x] Ring
-    - [x] Rectangle
-    - [x] Square
-    - [x] Triangle
-    - [x] Polygon
-  - [ ] needs more class structure, hierarchy, shared code
-  - [ ] collision detection
+  - [x] Shape parent class
+    - [ ] collision detection
+  - [x] Pixel
+  - [x] Line
+  - [x] Circle
+  - [x] Ellipse
+  - [x] Ring
+  - [x] Rectangle
+  - [x] Square
+  - [x] Triangle
+  - [x] Polygon
 - [ ] Textures
   - [ ] Loading images from files
   - [ ] Loading images from code, data,
@@ -100,6 +119,7 @@ end
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
 
 ## Contributors
 
