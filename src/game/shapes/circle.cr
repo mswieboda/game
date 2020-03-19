@@ -1,17 +1,18 @@
 require "./shape"
 
-class Circle
-  getter center : LibRay::Vector2
-  getter radius : Int32 | Float32
-  getter tint : LibRay::Color
-  getter? filled : Bool
+class Circle < Shape
+  property center : LibRay::Vector2
+  property radius : Int32 | Float32
 
-  def initialize(x, y, @radius, @tint = Shape::TINT, @filled = true)
+  delegate :x, :y, :x=, :y=, to: center
+
+  def initialize(x, y, @radius, tint = Shape::TINT, filled = Shape::FILLED)
+    super(
+      tint: tint,
+      filled: filled,
+    )
+
     @center = LibRay::Vector2.new(x: x, y: y)
-  end
-
-  def draw
-    filled? ? draw_filled : draw_outlined
   end
 
   def draw_filled

@@ -1,27 +1,23 @@
 class Shape
-  getter position : LibRay::Vector2
-  getter width : Int32 | Float32
-  getter height : Int32 | Float32
-  getter tint : LibRay::Color
+  property tint : LibRay::Color
+  property? filled : Bool
 
-  delegate :x, :y, to: position
+  TINT   = LibRay::RED
+  FILLED = true
 
-  TINT = LibRay::RED
-
-  def initialize(x, y, @width, @height, @tint = TINT)
-    @position = LibRay::Vector2.new(x: x, y: y)
-  end
-
-  def collision?(other : Shape)
-    x < other.x &&
-      x + width > other.x &&
-      y < other.y &&
-      y + height > other.y
+  def initialize(@tint = TINT, @filled = FILLED)
   end
 
   def update(_frame_time)
   end
 
-  def draw(_parent_x = 0, _parent_y = 0)
+  def draw
+    filled? ? draw_filled : draw_outlined
+  end
+
+  def draw_filled
+  end
+
+  def draw_outlined
   end
 end

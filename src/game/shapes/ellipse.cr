@@ -1,18 +1,19 @@
 require "./shape"
 
-class Ellipse
-  getter center : LibRay::Vector2
-  getter horizontal_radius : Int32 | Float32
-  getter vertical_radius : Int32 | Float32
-  getter tint : LibRay::Color
-  getter? filled : Bool
+class Ellipse < Shape
+  property center : LibRay::Vector2
+  property horizontal_radius : Int32 | Float32
+  property vertical_radius : Int32 | Float32
 
-  def initialize(x, y, @horizontal_radius, @vertical_radius, @tint = Shape::TINT, @filled = true)
+  delegate :x, :y, :x=, :y=, to: center
+
+  def initialize(x, y, @horizontal_radius, @vertical_radius, tint = Shape::TINT, filled = Shape::FILLED)
+    super(
+      tint: tint,
+      filled: filled,
+    )
+
     @center = LibRay::Vector2.new(x: x, y: y)
-  end
-
-  def draw
-    filled? ? draw_filled : draw_outlined
   end
 
   def draw_filled

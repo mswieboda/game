@@ -1,11 +1,14 @@
 require "./shape"
 
-class Triangle
-  getter v1, v2, v3 : LibRay::Vector2
-  getter tint : LibRay::Color
-  getter? filled : Bool
+class Triangle < Shape
+  property v1, v2, v3 : LibRay::Vector2
 
-  def initialize(x1, y1, x2, y2, x3, y3, @tint = Shape::TINT, @filled = true)
+  def initialize(x1, y1, x2, y2, x3, y3, tint = Shape::TINT, filled = Shape::FILLED)
+    super(
+      tint: tint,
+      filled: filled,
+    )
+
     @v1 = LibRay::Vector2.new(x: x1, y: y1)
     @v2 = LibRay::Vector2.new(x: x2, y: y2)
     @v3 = LibRay::Vector2.new(x: x3, y: y3)

@@ -1,14 +1,14 @@
 require "./shape"
 
-class Ring
-  getter center : LibRay::Vector2
-  getter inner_radius : Int32 | Float32
-  getter outer_radius : Int32 | Float32
-  getter start_angle : Int32 | Float32
-  getter end_angle : Int32 | Float32
-  getter segments : Int32
-  getter tint : LibRay::Color
-  getter? filled : Bool
+class Ring < Shape
+  property center : LibRay::Vector2
+  property inner_radius : Int32 | Float32
+  property outer_radius : Int32 | Float32
+  property start_angle : Int32 | Float32
+  property end_angle : Int32 | Float32
+  property segments : Int32
+
+  delegate :x, :y, :x=, :y=, to: center
 
   def initialize(
     x,
@@ -18,14 +18,15 @@ class Ring
     @start_angle = 0,
     @end_angle = 360,
     @segments = 0,
-    @tint = Shape::TINT,
-    @filled = true
+    tint = Shape::TINT,
+    filled = Shape::FILLED
   )
-    @center = LibRay::Vector2.new(x: x, y: y)
-  end
+    super(
+      tint: tint,
+      filled: filled,
+    )
 
-  def draw
-    filled? ? draw_filled : draw_outlined
+    @center = LibRay::Vector2.new(x: x, y: y)
   end
 
   def draw_filled
