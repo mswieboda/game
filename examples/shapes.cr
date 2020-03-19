@@ -54,6 +54,11 @@ class Shapes < Game
       Triangle.new(x1: 360, y1: 160, x2: 400, y2: 100, x3: 440, y3: 160, filled: false),
       Triangle.new(x1: 370, y1: 155, x2: 400, y2: 110, x3: 430, y3: 155),
     ]
+
+    @polygons = [
+      Polygon.new(x: 500, y: 130, sides: 5, radius: 30, filled: false),
+      Polygon.new(x: 500, y: 130, sides: 5, radius: 25),
+    ]
   end
 
   def update
@@ -69,6 +74,8 @@ class Shapes < Game
     @circles.each(&.draw)
 
     @triangles.each(&.draw)
+
+    @polygons.each(&.draw)
   end
 end
 
