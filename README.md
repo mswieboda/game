@@ -74,6 +74,7 @@ end
     - [x] Ellipse
     - [x] Ring
     - [x] Rectangle
+    - [x] Square
     - [x] Triangle
     - [x] Polygon
   - [ ] needs more class structure, hierarchy, shared code
