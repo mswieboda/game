@@ -64,6 +64,11 @@ class Shapes < Game
       Ellipse.new(x: 600, y: 130, horizontal_radius: 30, vertical_radius: 60, filled: false),
       Ellipse.new(x: 600, y: 130, horizontal_radius: 25, vertical_radius: 55),
     ]
+
+    @rings = [
+      Ring.new(x: 700, y: 130, inner_radius: 30, outer_radius: 60, filled: false),
+      Ring.new(x: 700, y: 130, inner_radius: 25, outer_radius: 55),
+    ]
   end
 
   def update
@@ -83,6 +88,8 @@ class Shapes < Game
     @polygons.each(&.draw)
 
     @ellipses.each(&.draw)
+
+    @rings.each(&.draw)
   end
 end
 

@@ -71,8 +71,8 @@ end
     - [x] Pixel
     - [x] Line
     - [x] Circle
-    - [ ] Ellipse
-    - [ ] Ring
+    - [x] Ellipse
+    - [x] Ring
     - [x] Rectangle
     - [x] Triangle
     - [x] Polygon
