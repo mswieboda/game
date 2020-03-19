@@ -59,6 +59,11 @@ class Shapes < Game
       Polygon.new(x: 500, y: 130, sides: 5, radius: 30, filled: false),
       Polygon.new(x: 500, y: 130, sides: 5, radius: 25),
     ]
+
+    @ellipses = [
+      Ellipse.new(x: 600, y: 130, horizontal_radius: 30, vertical_radius: 60, filled: false),
+      Ellipse.new(x: 600, y: 130, horizontal_radius: 25, vertical_radius: 55),
+    ]
   end
 
   def update
@@ -76,6 +81,8 @@ class Shapes < Game
     @triangles.each(&.draw)
 
     @polygons.each(&.draw)
+
+    @ellipses.each(&.draw)
   end
 end
 
