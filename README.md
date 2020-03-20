@@ -76,7 +76,7 @@ Note: Since many features are currently WIP, in the meantime (and afterwards), i
   - [ ] Clipboard
   - [ ] Cursor
 - [ ] Input
-  - [ ] Keys
+  - [x] Keys
   - [ ] Mouse
   - [ ] Gamepad
   - [ ] Touch

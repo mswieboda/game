@@ -1,9 +1,10 @@
 require "cray"
 
-# require "./game/shapes/shape.cr"
 require "./game/**"
 
 class Game
+  include Keys
+
   getter name : String
   getter target_fps : Int32
   getter initial_background_color : LibRay::Color
@@ -75,7 +76,7 @@ class Game
     close
   end
 
-  def update(frame_time)
+  def update
   end
 
   def draw
