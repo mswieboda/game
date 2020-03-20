@@ -8,52 +8,52 @@ build_release: build
 
 
 # Hello World
-build_hello_world: build
-	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/hello_world.cr -o build/hello_world
+build_hello_world_example: build
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/hello_world_example.cr -o build/hello_world_example
 
-build_release_hello_world: build_release
-	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/hello_world.cr -o build/release/hello_world
+build_release_hello_world_example: build_release
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/hello_world_example.cr -o build/release/hello_world_example
 
-run_hello_world: build_hello_world
-	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/hello_world
+run_hello_world_example: build_hello_world_example
+	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/hello_world_example
 
-run_release_hello_world: build_release_hello_world
-	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/release/hello_world_release
+run_release_hello_world_example: build_release_hello_world_example
+	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/release/hello_world_example_release
 
 
 # Entities
-build_shapes: build
-	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/shapes.cr -o build/shapes
+build_shapes_example: build
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/shapes_example.cr -o build/shapes_example
 
-build_release_shapes: build_release
-	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/shapes.cr -o build/release/shapes
+build_release_shapes_example: build_release
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/shapes_example.cr -o build/release/shapes_example
 
-run_shapes: build_shapes
-	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/shapes
+run_shapes_example: build_shapes_example
+	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/shapes_example
 
-run_release_shapes: build_release_shapes
-	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/release/shapes_release
+run_release_shapes_example: build_release_shapes_example
+	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/release/shapes_example_release
 
 
 # Hello World
-build_keys: build
-	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/keys.cr -o build/keys
+build_keys_example: build
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/keys_example.cr -o build/keys_example
 
-build_release_keys: build_release
-	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/keys.cr -o build/release/keys
+build_release_keys_example: build_release
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/keys_example.cr -o build/release/keys_example
 
-run_keys: build_keys
-	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/keys
+run_keys_example: build_keys_example
+	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/keys_example
 
-run_release_keys: build_release_keys
-	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/release/keys_release
+run_release_keys_example: build_release_keys_example
+	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/release/keys_example_release
 
 
 # All Examples
-build_examples: build_hello_world build_shapes build_keys
+build_examples: build_hello_world_example build_shapes_example build_keys_example
 
-build_release_examples: build_release_hello_world build_release_shapes build_release_keys
+build_release_examples: build_release_hello_world_example build_release_shapes_example build_release_keys_example
 
-run_examples: run_hello_world run_shapes run_keys
+run_examples: run_hello_world_example run_shapes_example run_keys_example
 
-run_release_examples: run_release_hello_world run_release_shapes run_release_keys
+run_release_examples: run_release_hello_world_example run_release_shapes_example run_release_keys_example

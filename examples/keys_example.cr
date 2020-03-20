@@ -1,6 +1,6 @@
 require "../src/game"
 
-class Input < Game
+class KeysExample < Game
   getter? space
   getter? enter
   getter? any_alt
@@ -8,7 +8,7 @@ class Input < Game
   getter keys : Array(Key)
 
   def initialize
-    super(name: "Input")
+    super(name: "Keys Example")
 
     @space = false
     @enter = false
@@ -132,4 +132,4 @@ class Input < Game
   end
 end
 
-Input.new.run
+KeysExample.new.run

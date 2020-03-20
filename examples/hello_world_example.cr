@@ -2,11 +2,11 @@ require "../src/game"
 
 # This example will automatically scale with the window.
 
-class HelloWorld < Game
+class HelloWorldExample < Game
   @color : LibRay::Color
 
   def initialize
-    super(name: "Hello World")
+    super(name: "Hello World Example")
 
     @font = LibRay::Font.new
     @text = "hello world"
@@ -35,4 +35,4 @@ class HelloWorld < Game
   end
 end
 
-HelloWorld.new.run
+HelloWorldExample.new.run

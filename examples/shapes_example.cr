@@ -2,7 +2,7 @@ require "../src/game"
 
 # This example will automatically scale with the window.
 
-class Shapes < Game
+class ShapesExample < Game
   def initialize
     super(name: "Shapes")
 
@@ -47,4 +47,4 @@ class Shapes < Game
   end
 end
 
-Shapes.new.run
+ShapesExample.new.run
