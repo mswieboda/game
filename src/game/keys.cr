@@ -88,6 +88,10 @@ enum Key
       Keys.{{name.id}}(self)
     end
   {% end %}
+
+  def exit_key
+    Keys.exit_key(self)
+  end
 end
 
 module Keys
@@ -113,8 +117,12 @@ module Keys
     (32..348).to_a.select { |num| LibRay.key_down?(num) }.map { |num| Key.new(num) }
   end
 
-  def set_exit_key(key : Key)
+  def self.exit_key(key : Key)
     LibRay.set_exit_key(key.value)
+  end
+
+  def exit_key(key : Key)
+    Key.exit_key(key.value)
   end
 
   def any_pressed?

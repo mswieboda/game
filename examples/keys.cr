@@ -18,6 +18,10 @@ class Input < Game
     @keys = [] of Key
   end
 
+  def setup
+    Key::X.exit_key
+  end
+
   def update
     @space = Key::Space.down?
     @enter = down?(Key::Enter)
@@ -34,6 +38,7 @@ class Input < Game
     draw_all_down
     draw_any_pressed
     draw_get_pressed
+    draw_exit_key
   end
 
   def draw_down
@@ -109,6 +114,18 @@ class Input < Game
       text: text,
       pos_x: 15,
       pos_y: 200,
+      font_size: 25,
+      color: LibRay::GREEN
+    )
+  end
+
+  def draw_exit_key
+    text = "press \"x\" key to exit (instead of default Escape key)"
+
+    LibRay.draw_text(
+      text: text,
+      pos_x: 15,
+      pos_y: 235,
       font_size: 25,
       color: LibRay::GREEN
     )
