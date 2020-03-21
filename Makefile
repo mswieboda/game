@@ -63,11 +63,25 @@ run_release_colors_example: build_release_colors_example
 	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/release/colors_example
 
 
+# Textures
+build_textures_example: build
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/textures_example.cr -o build/textures_example
+
+build_release_textures_example: build/release
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/textures_example.cr -o build/release/textures_example
+
+run_textures_example: build_textures_example
+	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/textures_example
+
+run_release_textures_example: build_release_textures_example
+	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/release/textures_example
+
+
 # All Examples
-build_examples: build_hello_world_example build_shapes_example build_keys_example build_colors_example
+build_examples: build_hello_world_example build_shapes_example build_keys_example build_colors_example build_textures_example
 
-build_release_examples: build_release_hello_world_example build_release_shapes_example build_release_keys_example build_release_colors_example
+build_release_examples: build_release_hello_world_example build_release_shapes_example build_release_keys_example build_release_colors_example build_release_textures_example
 
-run_examples: build_examples run_hello_world_example run_shapes_example run_keys_example run_colors_example
+run_examples: build_examples run_hello_world_example run_shapes_example run_keys_example run_colors_example run_textures_example
 
-run_release_examples: build_release_examples run_release_hello_world_example run_release_shapes_example run_release_keys_example run_release_colors_example
+run_release_examples: build_release_examples run_release_hello_world_example run_release_shapes_example run_release_keys_example run_release_colors_example run_release_textures_example

@@ -98,10 +98,10 @@ Note: Since many features are currently WIP, in the meantime (and afterwards), i
   - [x] Square
   - [x] Triangle
   - [x] Polygon
-- [ ] Textures
-  - [ ] Loading images from files
+- [x] Textures
+  - [x] Loading images from files
   - [ ] Loading images from code, data,
-  - [ ] Loading Texture (into GPU memory) from file or image
+  - [x] Loading Texture (into GPU memory) from file or image
   - [ ] Sprites
   - [ ] Animated Sprites
 - [x] Text
