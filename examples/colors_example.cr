@@ -4,7 +4,7 @@ require "../src/game"
 
 class ColorsExample < Game
   def initialize
-    super(name: "ColorsExample")
+    super(name: "Colors Example")
 
     # TODO: WIP showcase colors, and color ranges etc, gradients?
 

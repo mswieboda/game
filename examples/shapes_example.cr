@@ -4,7 +4,7 @@ require "../src/game"
 
 class ShapesExample < Game
   def initialize
-    super(name: "Shapes")
+    super(name: "Shapes Example")
 
     @shapes = [] of Shape
 
