@@ -104,9 +104,9 @@ Note: Since many features are currently WIP, in the meantime (and afterwards), i
   - [ ] Loading Texture (into GPU memory) from file or image
   - [ ] Sprites
   - [ ] Animated Sprites
-- [ ] Text
-  - [ ] Loading Fonts
-  - [ ] Drawing Text with Fonts
+- [x] Text
+  - [x] Loading Fonts
+  - [x] Drawing Text with Fonts
 - [ ] Models (for 3D)
 - [ ] Shaders (for 3D)
 - [ ] Audio
