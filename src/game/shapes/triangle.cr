@@ -14,6 +14,42 @@ class Triangle < Shape
     @v3 = LibRay::Vector2.new(x: x3, y: y3)
   end
 
+  def x
+    [v1.x, v2.x, v3.x].min
+  end
+
+  # TODO:
+  def x=(x)
+  end
+
+  def y
+    [v1.y, v2.y, v3.y].min
+  end
+
+  # TODO:
+  def y=(y)
+  end
+
+  def width
+    max_x = [v1.x, v2.x, v3.x].max
+
+    max_x - x
+  end
+
+  # TODO:
+  def width=(width)
+  end
+
+  def height
+    max_y = [v1.y, v2.y, v3.y].max
+
+    max_y - y
+  end
+
+  # TODO:
+  def height=(height)
+  end
+
   def draw
     filled? ? draw_filled : draw_outlined
   end

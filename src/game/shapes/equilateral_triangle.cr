@@ -1,6 +1,6 @@
-require "./ellipse"
+require "./polygon"
 
-class Circle < Ellipse
+class EquilateralTriangle < Polygon
   def initialize(
     center_x = nil,
     center_y = nil,
@@ -10,26 +10,25 @@ class Circle < Ellipse
     y = nil,
     size = nil,
 
+    @rotation = 0,
+
     color = nil,
     filled = Shape::FILLED
   )
     super(
       center_x: center_x,
       center_y: center_y,
-      horizontal_radius: radius,
-      vertical_radius: radius,
+      radius: radius,
 
       x: x,
       y: y,
-      width: size,
-      height: size,
+      size: size,
+
+      sides: 3,
+      rotation: rotation,
 
       color: color,
       filled: filled,
     )
-  end
-
-  def radius
-    horizontal_radius
   end
 end

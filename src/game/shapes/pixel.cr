@@ -14,11 +14,19 @@ class Pixel < Shape
     @position = LibRay::Vector2.new(x: x, y: y)
   end
 
+  def width
+    1
+  end
+
+  def height
+    1
+  end
+
   def draw_filled
     LibRay.draw_pixel_v(position, color.to_struct)
   end
 
   def draw_outlined
-    LibRay.draw_rectangle_lines(x - 1, y - 1, 3, 3, color.to_struct)
+    draw_filled
   end
 end
