@@ -7,9 +7,9 @@ class Rectangle < Shape
 
   delegate :x, :y, :x=, :y=, to: position
 
-  def initialize(x, y, @width, @height, tint = Shape::TINT, filled = Shape::FILLED)
+  def initialize(x, y, @width, @height, color = nil, filled = Shape::FILLED)
     super(
-      tint: tint,
+      color: color,
       filled: filled,
     )
 
@@ -17,10 +17,10 @@ class Rectangle < Shape
   end
 
   def draw_filled
-    LibRay.draw_rectangle(x, y, width, height, tint)
+    LibRay.draw_rectangle(x, y, width, height, color.to_struct)
   end
 
   def draw_outlined
-    LibRay.draw_rectangle_lines(x, y, width, height, tint)
+    LibRay.draw_rectangle_lines(x, y, width, height, color.to_struct)
   end
 end

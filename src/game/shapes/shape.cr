@@ -1,11 +1,11 @@
 class Shape
-  property tint : LibRay::Color
+  property color : Color
   property? filled : Bool
 
-  TINT   = LibRay::RED
   FILLED = true
 
-  def initialize(@tint = TINT, @filled = FILLED)
+  def initialize(color, @filled = FILLED)
+    @color = color || Color::Red
   end
 
   def update(_frame_time)

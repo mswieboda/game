@@ -4,9 +4,9 @@ class Line < Shape
   property start_position : LibRay::Vector2
   property end_position : LibRay::Vector2
 
-  def initialize(start_x, start_y, end_x, end_y, tint = Shape::TINT, filled = Shape::FILLED)
+  def initialize(start_x, start_y, end_x, end_y, color = nil, filled = Shape::FILLED)
     super(
-      tint: tint,
+      color: color,
       filled: filled,
     )
 
@@ -18,7 +18,7 @@ class Line < Shape
     LibRay.draw_line_v(
       start_pos: start_position,
       end_pos: end_position,
-      color: tint
+      color: color.to_struct
     )
   end
 end

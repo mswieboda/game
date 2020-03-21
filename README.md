@@ -82,7 +82,7 @@ Note: Since many features are currently WIP, in the meantime (and afterwards), i
   - [ ] Touch
 - [ ] Camera
   - [ ] Viewport
-- [ ] Color
+- [x] Color
 - [ ] Vectors/Position/Point
   - [ ] Vector
   - [ ] Vector3D

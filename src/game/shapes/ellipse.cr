@@ -7,9 +7,9 @@ class Ellipse < Shape
 
   delegate :x, :y, :x=, :y=, to: center
 
-  def initialize(x, y, @horizontal_radius, @vertical_radius, tint = Shape::TINT, filled = Shape::FILLED)
+  def initialize(x, y, @horizontal_radius, @vertical_radius, color = nil, filled = Shape::FILLED)
     super(
-      tint: tint,
+      color: color,
       filled: filled,
     )
 
@@ -22,7 +22,7 @@ class Ellipse < Shape
       center_y: center.y,
       radius_h: horizontal_radius,
       radius_v: vertical_radius,
-      color: tint
+      color: color.to_struct
     )
   end
 
@@ -32,7 +32,7 @@ class Ellipse < Shape
       center_y: center.y,
       radius_h: horizontal_radius,
       radius_v: vertical_radius,
-      color: tint
+      color: color.to_struct
     )
   end
 end

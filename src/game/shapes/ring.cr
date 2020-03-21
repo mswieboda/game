@@ -18,11 +18,11 @@ class Ring < Shape
     @start_angle = 0,
     @end_angle = 360,
     @segments = 0,
-    tint = Shape::TINT,
+    color = nil,
     filled = Shape::FILLED
   )
     super(
-      tint: tint,
+      color: color,
       filled: filled,
     )
 
@@ -37,7 +37,7 @@ class Ring < Shape
       start_angle: start_angle,
       end_angle: end_angle,
       segments: segments,
-      color: tint
+      color: color.to_struct
     )
   end
 
@@ -49,7 +49,7 @@ class Ring < Shape
       start_angle: start_angle,
       end_angle: end_angle,
       segments: segments,
-      color: tint
+      color: color.to_struct
     )
   end
 end

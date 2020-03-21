@@ -8,9 +8,9 @@ class Polygon < Shape
 
   delegate :x, :y, :x=, :y=, to: center
 
-  def initialize(x, y, @sides, @radius, @rotation = 0_f32, tint = Shape::TINT, filled = Shape::FILLED)
+  def initialize(x, y, @sides, @radius, @rotation = 0_f32, color = nil, filled = Shape::FILLED)
     super(
-      tint: tint,
+      color: color,
       filled: filled,
     )
 
@@ -18,10 +18,10 @@ class Polygon < Shape
   end
 
   def draw_filled
-    LibRay.draw_poly(center, sides, radius, rotation, tint)
+    LibRay.draw_poly(center, sides, radius, rotation, color.to_struct)
   end
 
   def draw_outlined
-    LibRay.draw_poly_lines(center, sides, radius, rotation, tint)
+    LibRay.draw_poly_lines(center, sides, radius, rotation, color.to_struct)
   end
 end

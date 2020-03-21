@@ -6,9 +6,9 @@ class Circle < Shape
 
   delegate :x, :y, :x=, :y=, to: center
 
-  def initialize(x, y, @radius, tint = Shape::TINT, filled = Shape::FILLED)
+  def initialize(x, y, @radius, color = nil, filled = Shape::FILLED)
     super(
-      tint: tint,
+      color: color,
       filled: filled,
     )
 
@@ -19,7 +19,7 @@ class Circle < Shape
     LibRay.draw_circle_v(
       center: center,
       radius: radius,
-      color: tint
+      color: color.to_struct
     )
   end
 
@@ -28,7 +28,7 @@ class Circle < Shape
       center_x: center.x,
       center_y: center.y,
       radius: radius,
-      color: tint
+      color: color.to_struct
     )
   end
 end

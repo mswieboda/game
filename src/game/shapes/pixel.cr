@@ -5,9 +5,9 @@ class Pixel < Shape
 
   delegate :x, :x=, :y, :y=, to: position
 
-  def initialize(x, y, tint = Shape::TINT, filled = Shape::FILLED)
+  def initialize(x, y, color = nil, filled = Shape::FILLED)
     super(
-      tint: tint,
+      color: color,
       filled: filled,
     )
 
@@ -15,6 +15,10 @@ class Pixel < Shape
   end
 
   def draw_filled
-    LibRay.draw_pixel_v(position, tint)
+    LibRay.draw_pixel_v(position, color.to_struct)
+  end
+
+  def draw_outlined
+    LibRay.draw_rectangle_lines(x - 1, y - 1, 3, 3, color.to_struct)
   end
 end
