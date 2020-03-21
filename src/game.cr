@@ -7,7 +7,7 @@ class Game
 
   getter name : String
   getter target_fps : Int32
-  getter initial_background_color : LibRay::Color
+  getter background_color : Color
   getter? fullscreen : Bool
   getter? resizeable : Bool
   getter? audio : Bool
@@ -23,7 +23,7 @@ class Game
   SCREEN_WIDTH  = 1280
   SCREEN_HEIGHT =  768
 
-  INITIAL_BACKGROUND_COLOR = LibRay::BLACK
+  BACKGROUND_COLOR = Color::Black
 
   TARGET_FPS = 60
 
@@ -40,7 +40,7 @@ class Game
     @screen_width = SCREEN_WIDTH,
     @screen_height = SCREEN_HEIGHT,
     @target_fps = TARGET_FPS,
-    @initial_background_color = INITIAL_BACKGROUND_COLOR,
+    @background_color = BACKGROUND_COLOR,
     @resizeable = RESIZEABLE,
     @audio = AUDIO,
     @debug = DEBUG,
@@ -80,7 +80,7 @@ class Game
 
   def draw_wrapper
     LibRay.begin_drawing
-    LibRay.clear_background(initial_background_color)
+    LibRay.clear_background(background_color.to_struct)
 
     draw
 

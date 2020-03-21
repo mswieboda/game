@@ -8,16 +8,20 @@ class Color
   Black = new
 
   # Whites
-  White = new(255)
+  White = new(color: 255)
 
   # Grays
-  Gray       = new(128)
+  Gray       = new(color: 128)
   Grey       = Gray
-  LightGray  = new(211)
+  LightGray  = new(color: 211)
   LightGrey  = LightGray
-  DarkGray   = new(169)
+  DarkGray   = new(color: 169)
   DarkGrey   = DarkGray
-  Silver     = new(192)
+  DarkerGray = new(color: 70)
+  DarkerGrey = DarkerGray
+  DimGray    = new(color: 105)
+  DimGrey    = DimGray
+  Silver     = new(color: 192)
   Snow       = new(red: 255, green: 250, blue: 250)
   WhiteSmoke = new(red: 245, green: 245, blue: 245)
   GunSmoke   = new(red: 122, green: 124, blue: 118)
@@ -94,18 +98,17 @@ class Color
   Tan         = new(red: 210, green: 180, blue: 140)
   Moccasin    = new(red: 255, green: 228, blue: 181)
 
-  def initialize(color = 0, alpha = 255)
-    @red = color.to_u8
-    @green = color.to_u8
-    @blue = color.to_u8
-    @alpha = alpha.to_u8
-  end
-
-  def initialize(red = 0, green = 0, blue = 0, alpha = 255)
+  def initialize(color = nil, red = 0, green = 0, blue = 0, alpha = 255)
     @red = red.to_u8
     @green = green.to_u8
     @blue = blue.to_u8
     @alpha = alpha.to_u8
+
+    if color
+      @red = color.to_u8
+      @green = color.to_u8
+      @blue = color.to_u8
+    end
   end
 
   def self.from_hex(hex_input)
