@@ -52,15 +52,15 @@ FooGame.new.run
 
 ```crystal
 def draw
-  # use built-in classes created in `intialize` or elsewhere to draw like Rectangle
+  # use built-in classes created in `initialize` or elsewhere to draw, such as `Rectangle`
   @rectangle.draw
 
-  # or call LibRay draw methods directly if you'd prefer, and if this library doesn't wrap it yet, like 3D
+  # or call LibRay draw methods directly
   LibRay.draw_rectangle(x: 30, y: 30, width: 100, height: 25, color: LibRay::RED)
 end
 ```
 
-Note: Since many features are currently WIP, in the meantime (and afterwards), interacting with `LibRay` (available via [cray](http://github.com/mswieboda/cray) directly is a valid option.
+Note: Since many features are currently WIP, interacting with `LibRay` directly is a valid option.
 
 
 ## Development
