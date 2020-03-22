@@ -1,18 +1,15 @@
 require "./shape"
 
 class Ring < Shape
-  property center : LibRay::Vector2
+  property center_x : Int32 | Float32
+  property center_y : Int32 | Float32
   property inner_radius : Int32 | Float32
   property outer_radius : Int32 | Float32
   property start_angle : Int32 | Float32
   property end_angle : Int32 | Float32
   property segments : Int32
 
-  delegate :x, :y, :x=, :y=, to: center
-
   def initialize(
-    @inner_radius,
-
     center_x = nil,
     center_y = nil,
     outer_radius = nil,
@@ -21,6 +18,7 @@ class Ring < Shape
     y = nil,
     size = nil,
 
+    @inner_radius = 0,
     @start_angle = 0,
     @end_angle = 360,
     @segments = 0,
@@ -33,32 +31,34 @@ class Ring < Shape
       filled: filled,
     )
 
-    if center_x && center_y && outer_radius
-      @outer_radius = outer_radius
-      @center = LibRay::Vector2.new(x: center_x, y: center_y)
-    elsif x && y && size
-      @outer_radius = (size / 2).to_f32
-      @center = LibRay::Vector2.new(x: x + @outer_radius, y: y + @outer_radius)
+    @outer_radius = outer_radius || (size && (size / 2).to_f32) || 1
+
+    if center_x && center_y
+      @center_x = center_x
+      @center_y = center_y
+    elsif x && y
+      @center_x = x + @outer_radius
+      @center_y = y + @outer_radius
     else
-      @outer_radius = 0
-      @center = LibRay::Vector2.new
+      @center_x = 0
+      @center_y = 0
     end
   end
 
   def x
-    center.x - outer_radius
+    center_x - outer_radius
   end
 
   def y
-    center.y - outer_radius
+    center_y - outer_radius
   end
 
   def x=(x)
-    center.x = x + outer_radius
+    center_x = x + outer_radius
   end
 
   def y=(y)
-    center.y = y + outer_radius
+    center_y = y + outer_radius
   end
 
   def width
@@ -77,9 +77,12 @@ class Ring < Shape
     width = height
   end
 
-  def draw_filled
+  def draw_filled(parent_x = 0, parent_y = 0)
     LibRay.draw_ring(
-      center: center,
+      center: LibRay::Vector2.new(
+        x: parent_x + center_x,
+        y: parent_y + center_y
+      ),
       inner_radius: inner_radius,
       outer_radius: outer_radius,
       start_angle: start_angle,
@@ -89,9 +92,12 @@ class Ring < Shape
     )
   end
 
-  def draw_outlined
+  def draw_outlined(parent_x = 0, parent_y = 0)
     LibRay.draw_ring_lines(
-      center: center,
+      center: LibRay::Vector2.new(
+        x: parent_x + center_x,
+        y: parent_y + center_y
+      ),
       inner_radius: inner_radius,
       outer_radius: outer_radius,
       start_angle: start_angle,

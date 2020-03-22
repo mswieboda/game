@@ -1,12 +1,11 @@
 require "./shape"
 
 class Polygon < Shape
-  property center : LibRay::Vector2
+  property center_x : Int32 | Float32
+  property center_y : Int32 | Float32
   property sides : Int32
   property radius : Int32 | Float32
   property rotation : Int32 | Float32
-
-  delegate :x, :y, :x=, :y=, to: center
 
   def initialize(
     center_x = nil,
@@ -28,32 +27,34 @@ class Polygon < Shape
       filled: filled,
     )
 
-    if center_x && center_y && radius
-      @radius = radius
-      @center = LibRay::Vector2.new(x: center_x, y: center_y)
-    elsif x && y && size
-      @radius = (size / 2).to_f32
-      @center = LibRay::Vector2.new(x: x + @radius, y: y + @radius)
+    @radius = radius || (size && (size / 2).to_f32) || 1
+
+    if center_x && center_y
+      @center_x = center_x
+      @center_y = center_y
+    elsif x && y
+      @center_x = x + @radius
+      @center_y = y + @radius
     else
-      @radius = 0
-      @center = LibRay::Vector2.new
+      @center_x = 0
+      @center_y = 0
     end
   end
 
   def x
-    center.x - radius
+    center_x - radius
   end
 
   def y
-    center.y - radius
+    center_y - radius
   end
 
   def x=(x)
-    center.x = x + radius
+    center_x = x + radius
   end
 
   def y=(y)
-    center.y = y + radius
+    center_y = y + radius
   end
 
   def width
@@ -72,11 +73,29 @@ class Polygon < Shape
     width = height
   end
 
-  def draw_filled
-    LibRay.draw_poly(center, sides, radius, rotation, color.to_struct)
+  def draw_filled(parent_x = 0, parent_y = 0)
+    LibRay.draw_poly(
+      center: LibRay::Vector2.new(
+        x: parent_x + center_x,
+        y: parent_y + center_y
+      ),
+      sides: sides,
+      radius: radius,
+      rotation: rotation,
+      color: color.to_struct
+    )
   end
 
-  def draw_outlined
-    LibRay.draw_poly_lines(center, sides, radius, rotation, color.to_struct)
+  def draw_outlined(parent_x = 0, parent_y = 0)
+    LibRay.draw_poly_lines(
+      center: LibRay::Vector2.new(
+        x: parent_x + center_x,
+        y: parent_y + center_y
+      ),
+      sides: sides,
+      radius: radius,
+      rotation: rotation,
+      color: color.to_struct
+    )
   end
 end

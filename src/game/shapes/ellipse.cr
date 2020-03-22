@@ -1,7 +1,8 @@
 require "./shape"
 
 class Ellipse < Shape
-  property center : LibRay::Vector2
+  property center_x : Int32 | Float32
+  property center_y : Int32 | Float32
   property horizontal_radius : Int32 | Float32
   property vertical_radius : Int32 | Float32
 
@@ -24,35 +25,35 @@ class Ellipse < Shape
       filled: filled,
     )
 
-    if center_x && center_y && horizontal_radius && vertical_radius
-      @horizontal_radius = horizontal_radius
-      @vertical_radius = vertical_radius
-      @center = LibRay::Vector2.new(x: center_x, y: center_y)
-    elsif x && y && width && height
-      @horizontal_radius = (width / 2).to_f32
-      @vertical_radius = (height / 2).to_f32
-      @center = LibRay::Vector2.new(x: x + @horizontal_radius, y: y + @vertical_radius)
+    @horizontal_radius = horizontal_radius || (width && (width / 2).to_f32) || 1
+    @vertical_radius = vertical_radius || (height && (height / 2).to_f32) || 1
+
+    if center_x && center_y
+      @center_x = center_x
+      @center_y = center_y
+    elsif x && y
+      @center_x = x + @horizontal_radius
+      @center_y = y + @vertical_radius
     else
-      @horizontal_radius = 0
-      @vertical_radius = 0
-      @center = LibRay::Vector2.new
+      @center_x = 0
+      @center_y = 0
     end
   end
 
   def x
-    center.x - horizontal_radius
+    center_x - horizontal_radius
   end
 
   def y
-    center.y - vertical_radius
+    center_y - vertical_radius
   end
 
   def x=(x)
-    center.x = x + horizontal_radius
+    center_x = x + horizontal_radius
   end
 
   def y=(y)
-    center.y = y + vertical_radius
+    center_y = y + vertical_radius
   end
 
   def width
@@ -71,20 +72,20 @@ class Ellipse < Shape
     @vertical_radius = (height / 2).to_f32
   end
 
-  def draw_filled
+  def draw_filled(parent_x = 0, parent_y = 0)
     LibRay.draw_ellipse(
-      center_x: center.x,
-      center_y: center.y,
+      center_x: parent_x + center_x,
+      center_y: parent_y + center_y,
       radius_h: horizontal_radius,
       radius_v: vertical_radius,
       color: color.to_struct
     )
   end
 
-  def draw_outlined
+  def draw_outlined(parent_x = 0, parent_y = 0)
     LibRay.draw_ellipse_lines(
-      center_x: center.x,
-      center_y: center.y,
+      center_x: parent_x + center_x,
+      center_y: parent_y + center_y,
       radius_h: horizontal_radius,
       radius_v: vertical_radius,
       color: color.to_struct

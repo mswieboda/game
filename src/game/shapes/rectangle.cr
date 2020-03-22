@@ -1,26 +1,32 @@
 require "./shape"
 
 class Rectangle < Shape
-  property position : LibRay::Vector2
+  property x : Int32 | Float32
+  property y : Int32 | Float32
   property width : Int32 | Float32
   property height : Int32 | Float32
 
-  delegate :x, :y, :x=, :y=, to: position
+  def initialize(@x = 0, @y = 0, @width = 1, @height = 1, color = nil, filled = Shape::FILLED)
+    super(color: color, filled: filled)
+  end
 
-  def initialize(x, y, @width, @height, color = nil, filled = Shape::FILLED)
-    super(
-      color: color,
-      filled: filled,
+  def draw_filled(parent_x = 0, parent_y = 0)
+    LibRay.draw_rectangle(
+      pos_x: parent_x + x,
+      pos_y: parent_y + y,
+      width: width,
+      height: height,
+      color: color.to_struct
     )
-
-    @position = LibRay::Vector2.new(x: x, y: y)
   end
 
-  def draw_filled
-    LibRay.draw_rectangle(x, y, width, height, color.to_struct)
-  end
-
-  def draw_outlined
-    LibRay.draw_rectangle_lines(x, y, width, height, color.to_struct)
+  def draw_outlined(parent_x = 0, parent_y = 0)
+    LibRay.draw_rectangle_lines(
+      pos_x: parent_x + x,
+      pos_y: parent_y + y,
+      width: width,
+      height: height,
+      color: color.to_struct
+    )
   end
 end

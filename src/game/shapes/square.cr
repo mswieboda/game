@@ -1,7 +1,7 @@
 require "./rectangle"
 
 class Square < Rectangle
-  def initialize(x, y, size, color = nil, filled = Shape::FILLED)
+  def initialize(x = 0, y = 0, size = 1, color = nil, filled = Shape::FILLED)
     super(
       x: x,
       y: y,

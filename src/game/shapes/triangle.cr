@@ -1,21 +1,19 @@
 require "./shape"
 
 class Triangle < Shape
-  property v1, v2, v3 : LibRay::Vector2
+  property x1 : Int32 | Float32
+  property x2 : Int32 | Float32
+  property x3 : Int32 | Float32
+  property y1 : Int32 | Float32
+  property y2 : Int32 | Float32
+  property y3 : Int32 | Float32
 
-  def initialize(x1, y1, x2, y2, x3, y3, color = nil, filled = Shape::FILLED)
-    super(
-      color: color,
-      filled: filled,
-    )
-
-    @v1 = LibRay::Vector2.new(x: x1, y: y1)
-    @v2 = LibRay::Vector2.new(x: x2, y: y2)
-    @v3 = LibRay::Vector2.new(x: x3, y: y3)
+  def initialize(@x1, @y1, @x2, @y2, @x3, @y3, color = nil, filled = Shape::FILLED)
+    super(color: color, filled: filled)
   end
 
   def x
-    [v1.x, v2.x, v3.x].min
+    [x1, x2, x3].min
   end
 
   # TODO:
@@ -23,7 +21,7 @@ class Triangle < Shape
   end
 
   def y
-    [v1.y, v2.y, v3.y].min
+    [y1, y2, y3].min
   end
 
   # TODO:
@@ -31,7 +29,7 @@ class Triangle < Shape
   end
 
   def width
-    max_x = [v1.x, v2.x, v3.x].max
+    max_x = [x1, x2, x3].max
 
     max_x - x
   end
@@ -41,7 +39,7 @@ class Triangle < Shape
   end
 
   def height
-    max_y = [v1.y, v2.y, v3.y].max
+    max_y = [y1, y2, y3].max
 
     max_y - y
   end
@@ -54,11 +52,39 @@ class Triangle < Shape
     filled? ? draw_filled : draw_outlined
   end
 
-  def draw_filled
-    LibRay.draw_triangle(v3, v2, v1, color.to_struct)
+  def draw_filled(parent_x = 0, parent_y = 0)
+    LibRay.draw_triangle(
+      v1: LibRay::Vector2.new(
+        x: parent_x + x3,
+        y: parent_y + y3,
+      ),
+      v2: LibRay::Vector2.new(
+        x: parent_x + x2,
+        y: parent_x + y2
+      ),
+      v3: LibRay::Vector2.new(
+        x: parent_x + x1,
+        y: parent_y + y1
+      ),
+      color: color.to_struct
+    )
   end
 
-  def draw_outlined
-    LibRay.draw_triangle_lines(v3, v2, v1, color.to_struct)
+  def draw_outlined(parent_x = 0, parent_y = 0)
+    LibRay.draw_triangle_lines(
+      v1: LibRay::Vector2.new(
+        x: parent_x + x3,
+        y: parent_y + y3,
+      ),
+      v2: LibRay::Vector2.new(
+        x: parent_x + x2,
+        y: parent_x + y2
+      ),
+      v3: LibRay::Vector2.new(
+        x: parent_x + x1,
+        y: parent_y + y1
+      ),
+      color: color.to_struct
+    )
   end
 end

@@ -9,9 +9,11 @@ abstract class Shape
   end
 
   def x
+    0
   end
 
   def y
+    0
   end
 
   def x=(_x)
@@ -21,9 +23,11 @@ abstract class Shape
   end
 
   def width
+    0
   end
 
   def height
+    0
   end
 
   def width=(_width)
@@ -35,13 +39,13 @@ abstract class Shape
   def update(_frame_time)
   end
 
-  def draw
-    filled? ? draw_filled : draw_outlined
+  def draw(parent_x = 0, parent_y = 0)
+    filled? ? draw_filled(parent_x, parent_y) : draw_outlined(parent_x, parent_y)
   end
 
-  def draw_filled
+  def draw_filled(parent_x = 0, parent_y = 0)
   end
 
-  def draw_outlined
+  def draw_outlined(parent_x = 0, parent_y = 0)
   end
 end

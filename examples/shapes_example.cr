@@ -3,6 +3,8 @@ require "../src/game"
 # This example will automatically scale with the window.
 
 class ShapesExample < Game
+  SPEED = 150
+
   def initialize
     super(name: "Shapes Example")
 
@@ -40,13 +42,32 @@ class ShapesExample < Game
 
     @shapes << EquilateralTriangle.new(x: 725, y: 100, size: 50, filled: false)
     @shapes << EquilateralTriangle.new(center_x: 750, center_y: 125, radius: 20)
+
+    @moving_shape = ShapeEntity.new(x: 300, y: 300, shape: Square.new(size: 50, color: Color::Purple))
   end
 
   def update
+    if down?([Key::Left, Key::A])
+      @moving_shape.x -= SPEED * frame_time
+    end
+
+    if down?([Key::Right, Key::D])
+      @moving_shape.x += SPEED * frame_time
+    end
+
+    if down?([Key::Up, Key::W])
+      @moving_shape.y -= SPEED * frame_time
+    end
+
+    if down?([Key::Down, Key::S])
+      @moving_shape.y += SPEED * frame_time
+    end
   end
 
   def draw
     @shapes.each(&.draw)
+
+    @moving_shape.draw
   end
 end
 
