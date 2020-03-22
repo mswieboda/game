@@ -49,9 +49,9 @@ class TexturesExample < Game
     @explosion.update(frame_time) unless @x == 0 && @y == 0
     @dust.update(frame_time)
 
-    if LibRay.mouse_button_pressed?(LibRay::MOUSE_LEFT_BUTTON)
-      @x = LibRay.get_mouse_x
-      @y = LibRay.get_mouse_y
+    if Mouse::Left.pressed?
+      @x = Mouse.x
+      @y = Mouse.y
       @explosion.restart
       @dust.paused? ? @dust.start : @dust.pause
     end

@@ -77,7 +77,7 @@ Note: Since many features are currently WIP, in the meantime (and afterwards), i
   - [ ] Cursor
 - [ ] Input
   - [x] Keys
-  - [ ] Mouse
+  - [x] Mouse
   - [ ] Gamepad
   - [ ] Touch
 - [ ] Camera
