@@ -113,6 +113,11 @@ Note: Since many features are currently WIP, in the meantime (and afterwards), i
 - [ ] Models (for 3D)
 - [ ] Shaders (for 3D)
 - [ ] Audio
+- [ ] Entity (for inheriting game objects with functionality)
+  - [ ] implement children/parent, generic containers
+  - [x] SpriteEntity
+  - [x] ShapeEntity
+
 
 
 ## Contributing
