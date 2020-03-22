@@ -5,6 +5,7 @@ class Sprite
   getter frame_time : Float32
   getter cols : Int32
   getter rows : Int32
+  getter? paused
 
   getter name : Symbol
   getter frames : Int32
@@ -68,6 +69,7 @@ class Sprite
       @end_frame = @frames - 1
     end
 
+    @paused = false
     @frame_time = 0_f32
   end
 
@@ -121,7 +123,7 @@ class Sprite
   end
 
   def update(frame_time)
-    animate(frame_time)
+    animate(frame_time) unless paused?
   end
 
   def animate(frame_time)
@@ -132,12 +134,21 @@ class Sprite
     end
   end
 
+  def pause
+    @paused = true
+  end
+
+  def start
+    @paused = false
+  end
+
   def done?
     frame >= end_frame
   end
 
   def restart
     @frame_time = 0_f32
+    start
   end
 
   def frame

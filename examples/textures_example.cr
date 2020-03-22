@@ -31,7 +31,7 @@ class TexturesExample < Game
     @texture = Texture.load("./assets/crystal_icon.png")
 
     @text = Text.new(
-      text: "click for sprite animation",
+      text: "click to start explosion animation\nand pause/resume dust animation",
       x: 15,
       y: 15,
       size: 20,
@@ -53,6 +53,7 @@ class TexturesExample < Game
       @x = LibRay.get_mouse_x
       @y = LibRay.get_mouse_y
       @explosion.restart
+      @dust.paused? ? @dust.start : @dust.pause
     end
   end
 
