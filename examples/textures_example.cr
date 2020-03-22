@@ -1,5 +1,30 @@
 require "../src/game"
 
+class Explosion < SpriteEntity
+  def initialize(x, y)
+    super(x: x, y: y, sprite_name: :explosion)
+  end
+
+  def update(frame_time)
+    if Mouse::Left.pressed?
+      @x = Mouse.x
+      @y = Mouse.y
+
+      restart
+    end
+
+    return if x == 0 && y == 0
+
+    super(frame_time)
+  end
+
+  def draw
+    return if x == 0 && y == 0
+
+    super
+  end
+end
+
 class TexturesExample < Game
   @texture : Texture
 
@@ -26,10 +51,9 @@ class TexturesExample < Game
       },
     ])
 
-    @explosion = Sprite.get(:explosion)
-
     @texture = Texture.load("./assets/crystal_icon.png")
-
+    @explosion = Explosion.new(x: 0, y: 0)
+    @dust = Sprite.get(:dust)
     @text = Text.new(
       text: "click to start explosion animation\nand pause/resume dust animation",
       x: 15,
@@ -38,32 +62,21 @@ class TexturesExample < Game
       spacing: 2,
       color: Color::Black
     )
-
-    @dust = Sprite.get(:dust)
-
-    @x = 0
-    @y = 0
   end
 
   def update
-    @explosion.update(frame_time) unless @x == 0 && @y == 0
+    @explosion.update(frame_time)
     @dust.update(frame_time)
 
     if Mouse::Left.pressed?
-      @x = Mouse.x
-      @y = Mouse.y
-      @explosion.restart
       @dust.paused? ? @dust.start : @dust.pause
     end
   end
 
   def draw
     @text.draw
-
     @texture.draw(x: 100, y: 100)
-
-    @explosion.draw(x: @x, y: @y) unless @x == 0 && @y == 0
-
+    @explosion.draw
     @dust.draw(x: 500, y: 500)
   end
 end
