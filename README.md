@@ -102,8 +102,11 @@ Note: Since many features are currently WIP, in the meantime (and afterwards), i
   - [x] Loading images from files
   - [ ] Loading images from code, data,
   - [x] Loading Texture (into GPU memory) from file or image
-  - [ ] Sprites
-  - [ ] Animated Sprites
+  - [x] Sprites
+  - [x] Animated Sprites
+    - TODO:
+      - [ ] reverse
+      - [ ] pause/stop
 - [x] Text
   - [x] Loading Fonts
   - [x] Drawing Text with Fonts
