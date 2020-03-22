@@ -4,15 +4,13 @@ class Sprite
   getter name : Symbol
   getter texture : Texture
   getter frames : Int32
+  getter cols : Int32
   getter rows : Int32
   getter width : Int32
   getter height : Int32
   getter frame_time : Float32
   property fps : Int32
   getter? loops
-
-  @frame : Int32
-  @row : Int32
 
   @@sprites = Hash(Symbol, Sprite).new
 
@@ -27,11 +25,10 @@ class Sprite
     @texture = Texture.new
     @texture = Texture.get(filename)
 
-    @frames = (@texture.width / @width).to_i
-    @rows = (@texture.width / @height).to_i
+    @cols = (@texture.width / @width).to_i
+    @rows = (@texture.height / @height).to_i
+    @frames = @cols * @rows
 
-    @frame = 0
-    @row = 0
     @frame_time = 0_f32
   end
 
@@ -111,6 +108,14 @@ class Sprite
     (@frame_time * @fps).to_i
   end
 
+  def col
+    frame % @cols
+  end
+
+  def row
+    (frame / @cols).to_i
+  end
+
   def frame=(frame)
     @frame_time = frame.to_f32 / @fps
   end
@@ -119,8 +124,8 @@ class Sprite
     LibRay.draw_texture_pro(
       texture: texture.to_struct,
       source_rec: LibRay::Rectangle.new(
-        x: frame * width,
-        y: @row * height,
+        x: col * width,
+        y: row * height,
         width: width,
         height: height
       ),

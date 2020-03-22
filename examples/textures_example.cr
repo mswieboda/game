@@ -13,7 +13,7 @@ class TexturesExample < Game
         width:    128,
         height:   128,
         loops:    false,
-        fps:      16,
+        fps:      30,
       },
     ])
 
