@@ -13,11 +13,20 @@ class TexturesExample < Game
         width:    128,
         height:   128,
         loops:    false,
-        fps:      30,
+      },
+      {
+        name:        :dust,
+        filename:    "./assets/explosion.png",
+        width:       128,
+        height:      128,
+        loops:       true,
+        fps:         3,
+        start_frame: 40,
+        end_frame:   48,
       },
     ])
 
-    @sprite = Sprite.get(:explosion)
+    @explosion = Sprite.get(:explosion)
 
     @texture = Texture.load("./assets/crystal_icon.png")
 
@@ -30,17 +39,20 @@ class TexturesExample < Game
       color: Color::Black
     )
 
+    @dust = Sprite.get(:dust)
+
     @x = 0
     @y = 0
   end
 
   def update
-    @sprite.update(frame_time) unless @x == 0 && @y == 0
+    @explosion.update(frame_time) unless @x == 0 && @y == 0
+    @dust.update(frame_time)
 
     if LibRay.mouse_button_pressed?(LibRay::MOUSE_LEFT_BUTTON)
       @x = LibRay.get_mouse_x
       @y = LibRay.get_mouse_y
-      @sprite.restart
+      @explosion.restart
     end
   end
 
@@ -49,7 +61,9 @@ class TexturesExample < Game
 
     @texture.draw(x: 100, y: 100)
 
-    @sprite.draw(x: @x, y: @y) unless @x == 0 && @y == 0
+    @explosion.draw(x: @x, y: @y) unless @x == 0 && @y == 0
+
+    @dust.draw(x: 500, y: 500)
   end
 end
 
