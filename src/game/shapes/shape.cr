@@ -1,4 +1,4 @@
-class Shape
+abstract class Shape
   property color : Color
   property? filled : Bool
 
