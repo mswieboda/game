@@ -7,6 +7,14 @@ build/release: build
 	mkdir -p build/release
 
 
+# Assets
+assets: build
+	cp -r examples/assets build/
+
+release_assets: build/release
+	cp -r examples/assets build/release/
+
+
 # Hello World
 build_hello_world_example: build
 	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/hello_world_example.cr -o build/hello_world_example
@@ -64,10 +72,10 @@ run_release_colors_example: build_release_colors_example
 
 
 # Textures
-build_textures_example: build
+build_textures_example: assets
 	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/textures_example.cr -o build/textures_example
 
-build_release_textures_example: build/release
+build_release_textures_example: release_assets
 	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/textures_example.cr -o build/release/textures_example
 
 run_textures_example: build_textures_example
