@@ -1,6 +1,7 @@
 require "./texture"
 
 class Sprite
+  getter name : Symbol
   getter texture : Texture
   getter frames : Int32
   getter rows : Int32
@@ -8,69 +9,77 @@ class Sprite
   getter height : Int32
   getter frame_time : Float32
   property fps : Int32
+  getter? loops
 
   @frame : Int32
   @row : Int32
 
-  @@sprites = Hash(String, NamedTuple(texture: Texture, frames: Int32, rows: Int32, fps: Int32)).new
+  @@sprites = Hash(Symbol, Sprite).new
 
-  def initialize(image : Image, @frames = 1, @rows = 1, @frame = 0, @row = 0, @fps = 0)
-    @texture = Texture.new
-    @texture = Texture.get(image)
+  FPS = 24
 
-    @width = (@texture.width / @frames).to_i
-    @height = (@texture.height / @rows).to_i
-    @frame_time = 0_f32
-  end
+  alias SpriteData = {name: Symbol, filename: String, width: Int32, height: Int32, fps: Int32, loops: Bool}
+  alias SpriteDataNoLoops = {name: Symbol, filename: String, width: Int32, height: Int32, fps: Int32}
+  alias SpriteDataNoFPS = {name: Symbol, filename: String, width: Int32, height: Int32, loops: Bool}
+  alias SpriteDataNoFPSNoLoops = {name: Symbol, filename: String, width: Int32, height: Int32}
 
-  # Intialize a sprite that wasn't already loaded
-  def initialize(filename : String, @frames = 1, @rows = 1, @frame = 0, @row = 0, @fps = 0)
+  def initialize(@name, filename : String, @width, @height, @fps = FPS, @loops = true)
     @texture = Texture.new
     @texture = Texture.get(filename)
 
-    @width = (@texture.width / @frames).to_i
-    @height = (@texture.height / @rows).to_i
+    @frames = (@texture.width / @width).to_i
+    @rows = (@texture.width / @height).to_i
 
-    @frame_time = 0_f32
-
-    @@sprites[filename] = {texture: @texture, frames: @frames, rows: @rows, fps: @fps}
-  end
-
-  def initialize(@texture : Texture, @frames = 1, @rows = 1, @frame = 0, @row = 0, @fps = 0)
-    @width = (@texture.width / @frames).to_i
-    @height = (@texture.height / @rows).to_i
+    @frame = 0
+    @row = 0
     @frame_time = 0_f32
   end
 
   # Get a loaded sprite
-  def self.get(filename)
-    puts "getting sprite: #{filename}" if Game::DEBUG
+  def self.get(name) : Sprite
+    puts "getting sprite: #{name}" if Game::DEBUG
 
-    sprite = @@sprites[filename]
+    sprite = @@sprites[name]
 
     unless sprite
-      raise "sprite: #{filename} not found, make sure to load first with Sprite.load before using"
+      raise "sprite: #{name} not found, make sure to load first with Sprite.load before using"
     end
 
-    puts "got sprite: #{filename}" if Game::DEBUG
+    puts "got sprite: #{name}" if Game::DEBUG
 
-    Sprite.new(texture: sprite[:texture], frames: sprite[:frames], rows: sprite[:rows], fps: sprite[:fps])
+    sprite
   end
 
   # Load multiple sprites
-  def self.load(sprites : Array(NamedTuple(filename: String, frames: Int32, rows: Int32, fps: Int32)))
-    sprites.each { |sprite| load(filename: sprite[:filename], frames: sprite[:frames], rows: sprite[:rows], fps: sprite[:fps]) }
+  def self.load(sprites : Array(SpriteData | SpriteDataNoFPS | SpriteDataNoLoops | SpriteDataNoFPSNoLoops))
+    sprites.each { |sprite| load(sprite) }
   end
 
   # Load a sprite
-  def self.load(filename, frames, rows, fps)
-    if @@sprites.has_key?(filename)
-      puts "sprite reloading: #{filename}" if Game::DEBUG
-      sprite_info = @@sprites[filename]
-      sprite = Sprite.new(texture: sprite_info[:texture], frames: frames, rows: rows, fps: fps)
+  def self.load(sprite : SpriteData)
+    load(name: sprite[:name], filename: sprite[:filename], width: sprite[:width], height: sprite[:height], fps: sprite[:fps], loops: sprite[:loops])
+  end
+
+  def self.load(sprite : SpriteDataNoLoops)
+    load(name: sprite[:name], filename: sprite[:filename], width: sprite[:width], height: sprite[:height], fps: sprite[:fps])
+  end
+
+  def self.load(sprite : SpriteDataNoFPS)
+    load(name: sprite[:name], filename: sprite[:filename], width: sprite[:width], height: sprite[:height], loops: sprite[:loops])
+  end
+
+  def self.load(sprite : SpriteDataNoFPSNoLoops)
+    load(name: sprite[:name], filename: sprite[:filename], width: sprite[:width], height: sprite[:height])
+  end
+
+  def self.load(name, filename, width, height, fps = FPS, loops = true)
+    if @@sprites.has_key?(name)
+      puts "sprite already loaded: #{name}" if Game::DEBUG
+      return @@sprites[name]
     else
-      puts "sprite initializing: #{filename}" if Game::DEBUG
-      sprite = Sprite.new(filename: filename, frames: frames, rows: rows, fps: fps)
+      puts "sprite initializing: #{name}" if Game::DEBUG
+      sprite = Sprite.new(name: name, filename: filename, width: width, height: height, fps: fps, loops: loops)
+      @@sprites[name] = sprite
     end
 
     puts "sprite loaded: #{filename}" if Game::DEBUG
@@ -79,7 +88,23 @@ class Sprite
   end
 
   def update(frame_time)
-    @frame_time += frame_time
+    animate(frame_time)
+  end
+
+  def animate(frame_time)
+    if loops? && done?
+      restart
+    else
+      @frame_time += frame_time unless done?
+    end
+  end
+
+  def done?
+    frame >= frames - 1
+  end
+
+  def restart
+    @frame_time = 0_f32
   end
 
   def frame

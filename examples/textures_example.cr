@@ -6,7 +6,20 @@ class TexturesExample < Game
   def initialize
     super(name: "Textures Example", background_color: Color::White)
 
-    Sprite.load("./assets/explosion.png", frames: 8, rows: 6, fps: 16)
+    Sprite.load([
+      {
+        name:     :explosion,
+        filename: "./assets/explosion.png",
+        width:    128,
+        height:   128,
+        loops:    false,
+        fps:      16,
+      },
+    ])
+
+    @sprite = Sprite.get(:explosion)
+
+    @texture = Texture.load("./assets/crystal_icon.png")
 
     @text = Text.new(
       text: "click for sprite animation",
@@ -17,20 +30,17 @@ class TexturesExample < Game
       color: Color::Black
     )
 
-    @texture = Texture.load("./assets/crystal_icon.png")
-
-    @sprite = Sprite.get("./assets/explosion.png")
-
     @x = 0
     @y = 0
   end
 
   def update
-    @sprite.update(frame_time)
+    @sprite.update(frame_time) unless @x == 0 && @y == 0
 
     if LibRay.mouse_button_pressed?(LibRay::MOUSE_LEFT_BUTTON)
       @x = LibRay.get_mouse_x
       @y = LibRay.get_mouse_y
+      @sprite.restart
     end
   end
 
