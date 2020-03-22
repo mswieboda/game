@@ -56,7 +56,7 @@ def draw
   @rectangle.draw
 
   # or call LibRay draw methods directly
-  LibRay.draw_rectangle(x: 30, y: 30, width: 100, height: 25, color: LibRay::RED)
+  LibRay.draw_rectangle(x: 30, y: 30, width: 100, height: 25, color: Color::Red.to_struct)
 end
 ```
 
@@ -69,8 +69,8 @@ Note: Since many features are currently WIP, interacting with `LibRay` directly 
   - [x] basic window: title, size, fullscreen (moving to Window)
   - [x] basic setup: FPS, audio
   - [x] basic game loop: running? frame time, update, draw wrapper, draw
-  - [ ] drawing mode
-  - [ ] sprite loading
+  - [ ] set drawing mode 2D/3D
+  - [ ] specific sprite pre loading `Game#load_sprites` method to override
 - [ ] Window
   - [ ] Monitor
   - [ ] Clipboard
@@ -106,7 +106,7 @@ Note: Since many features are currently WIP, interacting with `LibRay` directly 
   - [x] Animated Sprites
     - TODO:
       - [ ] reverse
-      - [ ] pause/stop
+      - [x] pause/stop
 - [x] Text
   - [x] Loading Fonts
   - [x] Drawing Text with Fonts
@@ -117,7 +117,6 @@ Note: Since many features are currently WIP, interacting with `LibRay` directly 
   - [ ] implement children/parent, generic containers
   - [x] SpriteEntity
   - [x] ShapeEntity
-
 
 
 ## Contributing
