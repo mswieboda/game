@@ -31,16 +31,14 @@ class TexturesExample < Game
   def initialize
     super(name: "Textures Example", background_color: Color::White)
 
-    Sprite.load([
-      {
-        name:     :explosion,
+    Sprite.load({
+      :explosion => {
         filename: "./assets/explosion.png",
         width:    128,
         height:   128,
         loops:    false,
       },
-      {
-        name:        :dust,
+      :dust => {
         filename:    "./assets/explosion.png",
         width:       128,
         height:      128,
@@ -49,11 +47,12 @@ class TexturesExample < Game
         start_frame: 40,
         end_frame:   48,
       },
-    ])
+    })
 
     @texture = Texture.load("./assets/crystal_icon.png")
     @explosion = Explosion.new(x: 0, y: 0)
     @dust = Sprite.get(:dust)
+    @dust2 = Sprite.get(:dust)
     @text = Text.new(
       text: "click to start explosion animation\nand pause/resume dust animation",
       x: 15,
@@ -67,6 +66,7 @@ class TexturesExample < Game
   def update
     @explosion.update(frame_time)
     @dust.update(frame_time)
+    @dust2.update(frame_time)
 
     if Mouse::Left.pressed?
       @dust.paused? ? @dust.start : @dust.pause
@@ -78,6 +78,7 @@ class TexturesExample < Game
     @texture.draw(x: 100, y: 100)
     @explosion.draw
     @dust.draw(x: 500, y: 500)
+    @dust2.draw(x: 700, y: 700)
   end
 end
 
