@@ -54,7 +54,7 @@ class TexturesExample < Game
     @dust = Sprite.get(:dust)
     @dust2 = Sprite.get(:dust)
     @text = Text.new(
-      text: "click to start explosion animation\nand pause/resume dust animation",
+      text: "click to start explosion animation\nand pause/resume first dust animation",
       x: 15,
       y: 15,
       size: 20,
