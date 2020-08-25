@@ -38,7 +38,7 @@ class FooGame < Game
     )
   end
 
-  def update
+  def update(frame_time)
   end
 
   def draw

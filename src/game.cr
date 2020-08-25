@@ -64,7 +64,7 @@ class Game
     while running?
       set_frame_time
 
-      update
+      update(frame_time)
 
       draw_wrapper
     end
@@ -72,7 +72,7 @@ class Game
     close
   end
 
-  def update
+  def update(_frame_time)
   end
 
   def draw
