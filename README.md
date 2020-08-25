@@ -7,11 +7,11 @@ Game wrapper library internally using [cray](http://github.com/mswieboda/cray) (
 
 1. Add the dependency to your `shard.yml`:
 
-   ```yaml
-   dependencies:
-     game:
-       github: mswieboda/game
-   ```
+```yaml
+dependencies:
+  game:
+    github: mswieboda/game
+```
 
 2. Run `shards install`
 
@@ -32,7 +32,7 @@ require "game"
 class FooGame < Game
   def initialize
     super(
-      name: "FooGame"
+      name: "FooGame",
       screen_width: 1024,
       screen_height: 768
     )
