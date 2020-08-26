@@ -46,7 +46,7 @@ class ShapesExample < Game
     @moving_shape = ShapeEntity.new(x: 300, y: 300, shape: Square.new(size: 50, color: Color::Purple))
   end
 
-  def update
+  def update(_frame_time)
     if down?([Key::Left, Key::A])
       @moving_shape.x -= SPEED * frame_time
     end

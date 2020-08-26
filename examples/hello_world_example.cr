@@ -19,7 +19,7 @@ class HelloWorldExample < Game
     @text.y = screen_height / 2.0 - @text.height / 2.0
   end
 
-  def update
+  def update(_frame_time)
   end
 
   def draw

@@ -63,7 +63,7 @@ class TexturesExample < Game
     )
   end
 
-  def update
+  def update(_frame_time)
     @explosion.update(frame_time)
     @dust.update(frame_time)
     @dust2.update(frame_time)

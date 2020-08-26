@@ -14,7 +14,7 @@ class ColorsExample < Game
     @shapes << Square.new(x: 655, y: 105, size: 40)
   end
 
-  def update
+  def update(_frame_time)
   end
 
   def draw

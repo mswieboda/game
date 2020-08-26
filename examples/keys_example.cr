@@ -22,7 +22,7 @@ class KeysExample < Game
     Key::X.exit_key
   end
 
-  def update
+  def update(_frame_time)
     @space = Key::Space.down?
     @enter = down?(Key::Enter)
     @any_alt = down?([Key::LAlt, Key::RAlt])
