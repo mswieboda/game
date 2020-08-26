@@ -64,13 +64,16 @@ Note: Since many features are currently WIP, interacting with `LibRay` directly 
 
 
 ## Development
-
+- [ ] API docs
+  - [ ] auto docs with tools like https://crystal-lang.org/api and other crystal shards
+  - [ ] host on github pages, or heroku, etc
 - [x] Game (core)
   - [x] basic window: title, size, fullscreen (moving to Window)
   - [x] basic setup: FPS, audio
   - [x] basic game loop: running? frame time, update, draw wrapper, draw
   - [ ] set drawing mode 2D/3D
   - [ ] specific sprite pre loading `Game#load_sprites` method to override
+  - [ ] specific sound pre loading `Game#load_sounds` method to override
 - [ ] Window
   - [ ] Monitor
   - [ ] Clipboard
@@ -110,13 +113,18 @@ Note: Since many features are currently WIP, interacting with `LibRay` directly 
 - [x] Text
   - [x] Loading Fonts
   - [x] Drawing Text with Fonts
-- [ ] Models (for 3D)
-- [ ] Shaders (for 3D)
-- [ ] Audio
+- [x] Sound
+  - [ ] Loading Wave
+  - [x] Loading Sounds
+  - [x] Play, stop, pause, resume
+  - [ ]
 - [ ] Entity (for inheriting game objects with functionality)
   - [ ] implement children/parent, generic containers
   - [x] SpriteEntity
   - [x] ShapeEntity
+- [ ] 3D
+  - [ ] Models
+  - [ ] Shaders
 
 
 ## Contributing
