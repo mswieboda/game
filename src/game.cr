@@ -109,7 +109,10 @@ class Game
   end
 
   def close
-    LibRay.close_audio_device if audio?
+    if audio?
+      Sound.unload_all
+      LibRay.close_audio_device if audio?
+    end
 
     LibRay.close_window
   end

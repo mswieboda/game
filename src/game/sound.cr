@@ -48,12 +48,12 @@ class Sound
   end
 
   def self.unload_all
-    @@sounds.each do |(asset_file, sound)|
-      stop(sound) if playing?(sound)
+    @@sounds.each do |(_name, sound)|
+      sound.stop if sound.playing?
     end
 
-    @@sounds.each do |(asset_file, sound)|
-      unload(sound)
+    @@sounds.each do |(_name, sound)|
+      sound.unload
     end
   end
 
