@@ -1,8 +1,8 @@
 class Color
-  property red : UInt8
-  property green : UInt8
-  property blue : UInt8
-  property alpha : UInt8
+  getter red : UInt8
+  getter green : UInt8
+  getter blue : UInt8
+  getter alpha : UInt8
 
   # Blacks
   Black = new
@@ -145,4 +145,34 @@ class Color
       a: alpha
     )
   end
+
+  def dup
+    new(red: red, blue: blue, green: green, alpha: alpha)
+  end
+
+  def to_s(io : IO)
+    io << "#<Color: "
+    io << "r: #{red}, "
+    io << "g: #{green}, "
+    io << "b: #{blue}, "
+    io << "a: #{alpha}"
+    io << ">"
+  end
+
+  # red, green, blue, alpha chainable setters
+  # ex: `some_color.red(5)` returns the color with red set to 5
+  {% for var in [:red, :green, :blue, :alpha] %}
+    def {{var.id}}(value : UInt8)
+      Color.new(
+        red: {{var}} == :red ? value : red,
+        blue: {{var}} == :blue ? value : blue,
+        green: {{var}} == :green ? value : green,
+        alpha: {{var}} == :alpha ? value : alpha,
+      )
+    end
+
+    def {{var.id}}(percent : Float32 | Float64)
+      {{var.id}}((percent * 255).to_u8)
+    end
+  {% end %}
 end
