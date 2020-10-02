@@ -37,8 +37,8 @@ class Game
   def initialize(
     @name = NAME,
     @fullscreen = FULLSCREEN,
-    @screen_width = SCREEN_WIDTH,
-    @screen_height = SCREEN_HEIGHT,
+    screen_width = nil,
+    screen_height = nil,
     @target_fps = TARGET_FPS,
     @background_color = BACKGROUND_COLOR,
     @resizeable = RESIZEABLE,
@@ -49,7 +49,24 @@ class Game
     @frame_time = 0_f32
 
     LibRay.set_config_flags(LibRay::FLAG_WINDOW_RESIZABLE) if resizeable?
-    LibRay.init_window(@screen_width, @screen_height, name)
+    LibRay.init_window(screen_width || SCREEN_WIDTH, screen_height || SCREEN_HEIGHT, name)
+
+    unless screen_height && screen_width
+      width = LibRay.get_monitor_width(0)
+
+      # faked maximize, 45 is probably only for macOS
+      height = LibRay.get_monitor_height(0) - 45
+      puts ">>> monitor: (#{width}, #{height})"
+
+      LibRay.set_window_size(width, height)
+      LibRay.set_window_position(0, 0)
+
+      # TODO: switch to maximize_window when raylib updated to 3.0 or 3.1
+      # it might change to a set_window_state(FLAG_WINDOW_MAXIMIZED) etc
+      # https://github.com/raysan5/raylib/pull/1357
+      # LibRay.maximize_window
+    end
+
     LibRay.toggle_fullscreen if fullscreen?
     LibRay.set_target_fps(target_fps)
     LibRay.init_audio_device if audio?
