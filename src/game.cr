@@ -105,12 +105,20 @@ class Game
     LibRay.end_drawing
   end
 
-  def screen_width
+  def self.screen_width
     LibRay.get_screen_width
   end
 
-  def screen_height
+  def self.screen_height
     LibRay.get_screen_height
+  end
+
+  def screen_width
+    self.class.screen_width
+  end
+
+  def screen_height
+    self.class.screen_height
   end
 
   def set_frame_time
