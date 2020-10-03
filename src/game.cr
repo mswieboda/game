@@ -56,7 +56,6 @@ class Game
 
       # faked maximize, 45 is probably only for macOS
       height = LibRay.get_monitor_height(0) - 45
-      puts ">>> monitor: (#{width}, #{height})"
 
       LibRay.set_window_size(width, height)
       LibRay.set_window_position(0, 0)
