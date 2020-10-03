@@ -165,10 +165,14 @@ class Sprite
   end
 
   def col
+    return 0 if @cols.zero?
+
     frame % @cols
   end
 
   def row
+    return 0 if @cols.zero?
+
     (frame / @cols).to_i
   end
 
