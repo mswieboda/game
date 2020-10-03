@@ -176,7 +176,7 @@ class Sprite
     @frame_time = frame.to_f32 / @fps
   end
 
-  def draw(x, y, tint = Color::White)
+  def draw(x, y, rotation = 0, tint = Color::White)
     LibRay.draw_texture_pro(
       texture: texture.to_struct,
       source_rec: LibRay::Rectangle.new(
@@ -195,7 +195,7 @@ class Sprite
         x: width / 2,
         y: height / 2
       ),
-      rotation: 0,
+      rotation: rotation,
       tint: tint.to_struct
     )
   end
