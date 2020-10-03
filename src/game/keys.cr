@@ -100,16 +100,24 @@ module Keys
       LibRay.key_{{name.id}}(key.value)
     end
 
-    def {{name.id}}(key : Key)
-      key.{{name.id}}
-    end
-
-    def {{name.id}}(keys : Array(Key))
+    def self.{{name.id}}(keys : Array(Key))
       keys.any?(&.{{name.id}})
     end
 
-    def all_{{name.id}}(keys : Array(Key))
+    def self.all_{{name.id}}(keys : Array(Key))
       keys.all?(&.{{name.id}})
+    end
+
+    def {{name.id}}(key : Key)
+      Keys.{{name.id}}(key)
+    end
+
+    def {{name.id}}(keys : Array(Key))
+      Keys.{{name.id}}(keys)
+    end
+
+    def all_{{name.id}}(keys : Array(Key))
+      Keys.all_{{name.id}}(keys)
     end
   {% end %}
 
