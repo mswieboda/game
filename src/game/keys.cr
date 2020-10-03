@@ -121,8 +121,12 @@ module Keys
     end
   {% end %}
 
-  def get_pressed : Array(Key)
+  def self.get_pressed : Array(Key)
     (32..348).to_a.select { |num| LibRay.key_down?(num) }.map { |num| Key.new(num) }
+  end
+
+  def get_pressed : Array(Key)
+    Keys.get_pressed
   end
 
   def self.exit_key(key : Key)
@@ -133,7 +137,11 @@ module Keys
     Key.exit_key(key.value)
   end
 
-  def any_pressed?
+  def self.any_pressed?
     get_pressed.any?
+  end
+
+  def any_pressed?
+    Keys.any_pressed?
   end
 end
