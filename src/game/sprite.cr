@@ -11,9 +11,9 @@ class Sprite
   getter width : Int32
   getter height : Int32
   property fps : Int32
-  getter? loops
-  getter start_frame : Int32
-  getter end_frame : Int32
+  property? loops
+  property start_frame : Int32
+  property end_frame : Int32
 
   FPS = 24
 
