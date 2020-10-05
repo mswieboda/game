@@ -129,7 +129,11 @@ class Game
   end
 
   def running?
-    !should_close?
+    !should_close? && !close?
+  end
+
+  def close?
+    false
   end
 
   def close
