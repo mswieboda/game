@@ -60,7 +60,7 @@ class Triangle < Shape
       ),
       v2: LibRay::Vector2.new(
         x: parent_x + x2,
-        y: parent_x + y2
+        y: parent_y + y2
       ),
       v3: LibRay::Vector2.new(
         x: parent_x + x1,
@@ -78,7 +78,7 @@ class Triangle < Shape
       ),
       v2: LibRay::Vector2.new(
         x: parent_x + x2,
-        y: parent_x + y2
+        y: parent_y + y2
       ),
       v3: LibRay::Vector2.new(
         x: parent_x + x1,
