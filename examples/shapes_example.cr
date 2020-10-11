@@ -37,6 +37,8 @@ class ShapesExample < Game
     @shapes << Rectangle.new(x: 600, y: 100, width: 20, height: 50, filled: false)
     @shapes << Rectangle.new(x: 605, y: 105, width: 10, height: 40)
 
+    @shapes << Rectangle.new(x: 500, y: 500, width: 30, height: 50, rotation: 50)
+
     @shapes << Square.new(x: 650, y: 100, size: 50, filled: false)
     @shapes << Square.new(x: 655, y: 105, size: 40)
 
@@ -44,6 +46,7 @@ class ShapesExample < Game
     @shapes << EquilateralTriangle.new(center_x: 750, center_y: 125, radius: 20)
 
     @moving_shape = ShapeEntity.new(x: 300, y: 300, shape: Square.new(size: 50, color: Color::Purple))
+    @rotating_shape = Rectangle.new(x: 500, y: 500, width: 50, height: 100, color: Color::Purple)
   end
 
   def update(_frame_time)
@@ -62,12 +65,21 @@ class ShapesExample < Game
     if down?([Key::Down, Key::S])
       @moving_shape.y += SPEED * frame_time
     end
+
+    if Key::E.down?
+      @rotating_shape.rotation += SPEED * frame_time
+    end
+
+    if Key::Q.down?
+      @rotating_shape.rotation -= SPEED * frame_time
+    end
   end
 
   def draw
     @shapes.each(&.draw)
 
     @moving_shape.draw
+    @rotating_shape.draw
   end
 end
 
