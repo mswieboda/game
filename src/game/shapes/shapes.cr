@@ -1,0 +1,2 @@
+require "./shape"
+require "./*"

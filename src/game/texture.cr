@@ -1,4 +1,4 @@
-class Texture
+class Game::Texture
   getter texture : LibRay::Texture2D
 
   delegate :width, :height, to: texture

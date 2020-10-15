@@ -17,7 +17,7 @@ release_assets: build/release
 
 # Hello World
 build_hello_world_example: build
-	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/hello_world_example.cr -o build/hello_world_example
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/hello_world_example.cr --error-trace -o build/hello_world_example
 
 build_release_hello_world_example: build/release
 	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/hello_world_example.cr -o build/release/hello_world_example
@@ -31,10 +31,10 @@ run_release_hello_world_example: build_release_hello_world_example
 
 # Shapes
 build_shapes_example: build
-	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/shapes_example.cr -o build/shapes_example
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/shapes_example.cr --error-trace -o build/shapes_example
 
 build_release_shapes_example: build/release
-	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/shapes_example.cr -o build/release/shapes_example
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/shapes_example.cr --error-trace -o build/release/shapes_example
 
 run_shapes_example: build_shapes_example
 	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/shapes_example
@@ -45,7 +45,7 @@ run_release_shapes_example: build_release_shapes_example
 
 # Keys
 build_keys_example: build
-	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/keys_example.cr -o build/keys_example
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/keys_example.cr --error-trace -o build/keys_example
 
 build_release_keys_example: build/release
 	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/keys_example.cr -o build/release/keys_example
@@ -59,7 +59,7 @@ run_release_keys_example: build_release_keys_example
 
 # Colors
 build_colors_example: build
-	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/colors_example.cr -o build/colors_example
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/colors_example.cr --error-trace -o build/colors_example
 
 build_release_colors_example: build/release
 	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/colors_example.cr -o build/release/colors_example
@@ -73,7 +73,7 @@ run_release_colors_example: build_release_colors_example
 
 # Textures
 build_textures_example: assets
-	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/textures_example.cr -o build/textures_example
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/textures_example.cr --error-trace -o build/textures_example
 
 build_release_textures_example: release_assets
 	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/textures_example.cr -o build/release/textures_example
@@ -86,7 +86,7 @@ run_release_textures_example: build_release_textures_example
 
 # Sound
 build_sound_example: assets
-	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/sound_example.cr -o build/sound_example
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/sound_example.cr --error-trace -o build/sound_example
 
 build_release_sound_example: release_assets
 	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/sound_example.cr -o build/release/sound_example

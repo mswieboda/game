@@ -1,10 +1,9 @@
 require "cray"
 
-require "./game/**"
+require "./*"
+require "./shapes"
 
-class Game
-  include Keys
-
+class Game::Game
   getter name : String
   getter target_fps : Int32
   getter background_color : Color

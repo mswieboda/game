@@ -1,14 +1,14 @@
 require "../src/game"
 
-class Explosion < SpriteEntity
+class Explosion < Game::SpriteEntity
   def initialize(x, y)
     super(x: x, y: y, sprite_name: :explosion)
   end
 
   def update(frame_time)
-    if Mouse::Left.pressed?
-      @x = Mouse.x
-      @y = Mouse.y
+    if Game::Mouse::Left.pressed?
+      @x = Game::Mouse.x
+      @y = Game::Mouse.y
 
       restart
     end
@@ -25,13 +25,13 @@ class Explosion < SpriteEntity
   end
 end
 
-class TexturesExample < Game
-  @texture : Texture
+class TexturesExample < Game::Game
+  @texture : Game::Texture
 
   def initialize
-    super(name: "Textures Example", background_color: Color::White)
+    super(name: "Textures Example", background_color: Game::Color::White)
 
-    Sprite.load({
+    Game::Sprite.load({
       :explosion => {
         filename: "./assets/explosion.png",
         width:    128,
@@ -49,17 +49,17 @@ class TexturesExample < Game
       },
     })
 
-    @texture = Texture.load("./assets/crystal_icon.png")
+    @texture = Game::Texture.load("./assets/crystal_icon.png")
     @explosion = Explosion.new(x: 0, y: 0)
-    @dust = Sprite.get(:dust)
-    @dust2 = Sprite.get(:dust)
-    @text = Text.new(
+    @dust = Game::Sprite.get(:dust)
+    @dust2 = Game::Sprite.get(:dust)
+    @text = Game::Text.new(
       text: "click to start explosion animation\nand pause/resume first dust animation",
       x: 15,
       y: 15,
       size: 20,
       spacing: 2,
-      color: Color::Black
+      color: Game::Color::Black
     )
   end
 
@@ -68,7 +68,7 @@ class TexturesExample < Game
     @dust.update(frame_time)
     @dust2.update(frame_time)
 
-    if Mouse::Left.pressed?
+    if Game::Mouse::Left.pressed?
       @dust.paused? ? @dust.start : @dust.pause
     end
   end

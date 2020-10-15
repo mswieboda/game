@@ -1,7 +1,7 @@
-class ShapeEntity < Entity
+class Game::ShapeEntity < Game::Entity
   property x : Int32 | Float32
   property y : Int32 | Float32
-  property shape : Shape
+  property shape : ::Game::Shape
 
   delegate :width, :height, to: shape
 

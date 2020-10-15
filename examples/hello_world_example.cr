@@ -1,16 +1,14 @@
 require "../src/game"
 
-# This example will automatically scale with the window.
-
-class HelloWorldExample < Game
+class HelloWorldExample < Game::Game
   def initialize
     super(name: "Hello World Example")
 
-    @text = Text.new(
+    @text = Game::Text.new(
       text: "hello world",
       size: 30,
       spacing: 10,
-      color: Color::Green
+      color: Game::Color::Red
     )
   end
 

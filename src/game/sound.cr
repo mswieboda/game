@@ -1,4 +1,4 @@
-class Sound
+class Game::Sound
   getter sound : LibRay::Sound
   getter volume : Float32
   getter pitch : Float32

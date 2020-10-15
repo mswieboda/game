@@ -1,11 +1,12 @@
 require "../src/game"
 
-class KeysExample < Game
+class KeysExample < Game::Game
   getter? space
   getter? enter
   getter? any_alt
   getter? all_shift
-  getter keys : Array(Key)
+  getter? any_pressed
+  getter keys : Array(Game::Key)
 
   def initialize
     super(name: "Keys Example")
@@ -15,20 +16,20 @@ class KeysExample < Game
     @any_alt = false
     @all_shift = false
     @any_pressed = false
-    @keys = [] of Key
+    @keys = [] of Game::Key
   end
 
   def setup
-    Key::X.exit_key
+    Game::Key::X.exit_key
   end
 
   def update(_frame_time)
-    @space = Key::Space.down?
-    @enter = down?(Key::Enter)
-    @any_alt = down?([Key::LAlt, Key::RAlt])
-    @all_shift = all_down?([Key::LShift, Key::RShift])
-    @any_pressed = any_pressed?
-    @keys = @any_pressed ? get_pressed : [] of Key
+    @space = Game::Key::Space.down?
+    @enter = Game::Keys.down?(Game::Key::Enter)
+    @any_alt = Game::Keys.down?([Game::Key::LAlt, Game::Key::RAlt])
+    @all_shift = Game::Keys.all_down?([Game::Key::LShift, Game::Key::RShift])
+    @any_pressed = Game::Keys.any_pressed?
+    @keys = @any_pressed ? Game::Keys.get_pressed : [] of Game::Key
   end
 
   def draw
@@ -95,7 +96,7 @@ class KeysExample < Game
 
   def draw_any_pressed
     text = "any pressed: "
-    text += "x" if @any_pressed
+    text += "x" if any_pressed?
 
     LibRay.draw_text(
       text: text,

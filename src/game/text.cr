@@ -1,4 +1,6 @@
-class Text
+puts ">>> text"
+
+class Game::Text
   property text : String
   property font : Font
   property x : Int32 | Float32 | Float64

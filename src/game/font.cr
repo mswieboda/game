@@ -1,4 +1,4 @@
-class Font
+class Game::Font
   property font : LibRay::Font
 
   def initialize

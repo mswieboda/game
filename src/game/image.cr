@@ -1,4 +1,4 @@
-class Image
+class Game::Image
   property image : LibRay::Image
 
   def initialize

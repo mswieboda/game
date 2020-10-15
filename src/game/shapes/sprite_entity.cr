@@ -1,4 +1,4 @@
-class SpriteEntity < Entity
+class Game::SpriteEntity < Game::Entity
   property x : Int32 | Float32
   property y : Int32 | Float32
   property width : Int32 | Float32

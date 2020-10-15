@@ -1,6 +1,4 @@
-require "./texture"
-
-class Sprite
+class Game::Sprite
   getter texture : Texture
   getter frame_time : Float32
   getter cols : Int32

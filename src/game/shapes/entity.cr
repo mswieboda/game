@@ -1,4 +1,4 @@
-abstract class Entity
+abstract class Game::Entity
   def initialize
   end
 

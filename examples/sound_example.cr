@@ -1,23 +1,23 @@
 require "../src/game"
 
-class SoundExample < Game
+class SoundExample < Game::Game
   def initialize
     super(name: "Sound Example", audio: true)
 
-    @text = Text.new(
+    @text = Game::Text.new(
       text: "press SPACE to play sound",
       size: 30,
       spacing: 10,
-      color: Color::Green
+      color: Game::Color::Green
     )
 
     # load all sounds after initializing the game
-    Sound.load([
+    Game::Sound.load([
       {name: "test", filename: "./assets/sound.wav", volume: 0.5_f32, pitch: 0.5_f32},
     ])
 
     # instantiates a new sound
-    @sound = Sound.get("test")
+    @sound = Game::Sound.get("test")
   end
 
   def setup
@@ -26,7 +26,7 @@ class SoundExample < Game
   end
 
   def update(_frame_time)
-    if Key::Space.pressed?
+    if Game::Key::Space.pressed?
       @sound.randomize_pitch(min: 0.5_f32, max: 1.5_f32)
       @sound.play
     end
