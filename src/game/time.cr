@@ -9,7 +9,7 @@ class Game::Time
     LibRay.get_frame_time
   end
 
-  def initialize(@start_time = 0.0, start = true)
+  def initialize(@start_time = 0.0, start = false)
     self.start if start
   end
 
@@ -18,6 +18,9 @@ class Game::Time
   end
 
   def get
-    self.class.get - @start_time
+    return 0.0 if @start_time <= 0.0
+    time = self.class.get - @start_time
+    return 0.0 if time <= 0.0
+    time
   end
 end
