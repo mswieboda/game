@@ -1,0 +1,3 @@
+require "cray"
+
+require "./game/**"

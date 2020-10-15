@@ -1,8 +1,3 @@
-require "cray"
-
-require "./*"
-require "./shapes"
-
 class Game::Game
   getter name : String
   getter target_fps : Int32
