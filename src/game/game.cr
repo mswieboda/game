@@ -13,8 +13,6 @@ class Game::Game
   getter? debug : Bool
   getter? draw_fps : Bool
 
-  getter frame_time : Float32
-
   NAME = "Game"
 
   FULLSCREEN = false
@@ -45,8 +43,6 @@ class Game::Game
     @debug = DEBUG,
     @draw_fps = DRAW_FPS
   )
-    @frame_time = 0_f32
-
     LibRay.set_config_flags(LibRay::FLAG_WINDOW_RESIZABLE) if resizeable?
     LibRay.init_window(screen_width || SCREEN_WIDTH, screen_height || SCREEN_HEIGHT, name)
 
@@ -77,9 +73,7 @@ class Game::Game
     setup
 
     while running?
-      set_frame_time
-
-      update(frame_time)
+      update(Time.frame_time)
 
       draw_wrapper
     end
@@ -117,10 +111,6 @@ class Game::Game
 
   def screen_height
     self.class.screen_height
-  end
-
-  def set_frame_time
-    @frame_time = LibRay.get_frame_time
   end
 
   def should_close?

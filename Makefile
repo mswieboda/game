@@ -88,7 +88,7 @@ run_release_textures_example: build_release_textures_example
 build_sound_example: assets
 	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/sound_example.cr --error-trace -o build/sound_example
 
-build_release_sound_example: release_assets
+build_release_sound_example: build/release
 	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/sound_example.cr -o build/release/sound_example
 
 run_sound_example: build_sound_example
@@ -97,12 +97,25 @@ run_sound_example: build_sound_example
 run_release_sound_example: build_release_sound_example
 	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/release/sound_example
 
+# Time
+build_time_example: build
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/time_example.cr -o build/time_example
+
+build_release_time_example: release_assets
+	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build --release --no-debug examples/time_example.cr -o build/release/time_example
+
+run_time_example: build_time_example
+	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/time_example
+
+run_release_time_example: build_release_time_example
+	env LD_LIBRARY_PATH="$(PWD)/lib_ext" ./build/release/time_example
+
 
 # All Examples
-build_examples: build_hello_world_example build_shapes_example build_keys_example build_colors_example build_textures_example build_sound_example
+build_examples: build_hello_world_example build_shapes_example build_keys_example build_colors_example build_textures_example build_sound_example build_time_example
 
-build_release_examples: build_release_hello_world_example build_release_shapes_example build_release_keys_example build_release_colors_example build_release_textures_example build_release_sound_example
+build_release_examples: build_release_hello_world_example build_release_shapes_example build_release_keys_example build_release_colors_example build_release_textures_example build_release_sound_example build_release_time_example
 
-run_examples: build_examples run_hello_world_example run_shapes_example run_keys_example run_colors_example run_textures_example run_sound_example
+run_examples: build_examples run_hello_world_example run_shapes_example run_keys_example run_colors_example run_textures_example run_sound_example run_time_example
 
-run_release_examples: build_release_examples run_release_hello_world_example run_release_shapes_example run_release_keys_example run_release_colors_example run_release_textures_example run_release_sound_example
+run_release_examples: build_release_examples run_release_hello_world_example run_release_shapes_example run_release_keys_example run_release_colors_example run_release_textures_example run_release_sound_example run_release_time_example
