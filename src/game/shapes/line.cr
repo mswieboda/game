@@ -1,9 +1,9 @@
 module Game
   class Line < Shape
-    property start_x : Int32
-    property start_y : Int32
-    property end_x : Int32
-    property end_y : Int32
+    property start_x : Int32 | Float32
+    property start_y : Int32 | Float32
+    property end_x : Int32 | Float32
+    property end_y : Int32 | Float32
 
     def initialize(@end_x, @end_y, @start_x = 0, @start_y = 0, color = nil, filled = Shape::FILLED)
       super(color: color, filled: filled)
