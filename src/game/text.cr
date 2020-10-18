@@ -1,5 +1,3 @@
-puts ">>> text"
-
 class Game::Text
   property text : String
   property font : Font

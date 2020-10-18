@@ -92,6 +92,10 @@ class Game::Game
     LibRay.end_drawing
   end
 
+  def self.to_degrees(radians : Int32 | Float32 | Float64)
+    radians * 180 / Math::PI
+  end
+
   def self.screen_width
     LibRay.get_screen_width
   end

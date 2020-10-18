@@ -17,6 +17,11 @@ class ShapesExample < Game::Game
     @shapes << Game::Line.new(start_x: 100, start_y: 125, end_x: 110, end_y: 135)
     @shapes << Game::Line.new(start_x: 100, start_y: 135, end_x: 110, end_y: 125)
 
+    @shapes << Game::Line.new(start_x: 50, start_y: 200, end_x: 100, end_y: 250, thickness: 15)
+    @shapes << Game::Line.new(start_x: 50, start_y: 250, end_x: 100, end_y: 200, thickness: 15)
+    @shapes << Game::Line.new(start_x: 75, start_y: 200, end_x: 75, end_y: 250, thickness: 3, color: Game::Color::Purple)
+    @shapes << Game::Line.new(start_x: 50, start_y: 225, end_x: 100, end_y: 225, thickness: 3, color: Game::Color::Purple)
+
     @shapes << Game::Circle.new(x: 175, y: 100, size: 50, filled: false)
     @shapes << Game::Circle.new(center_x: 200, center_y: 125, radius: 20)
 
@@ -47,7 +52,7 @@ class ShapesExample < Game::Game
     @rotating_shape = Game::Rectangle.new(x: 500, y: 500, width: 50, height: 100, color: Game::Color::Purple)
   end
 
-  def update(_frame_time)
+  def update(frame_time)
     if Game::Keys.down?([Game::Key::Left, Game::Key::A])
       @moving_shape.x -= SPEED * frame_time
     end
