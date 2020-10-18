@@ -94,7 +94,7 @@ module Game
       rectangle
     end
 
-    def draw_line(parent_x = 0, parent_y = 0)
+    def draw_line(parent_x = 0, parent_y = 0, color = @color)
       LibRay.draw_line_v(
         start_pos: LibRay::Vector2.new(
           x: parent_x + start_x,
