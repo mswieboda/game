@@ -5,8 +5,9 @@ module Game
     property width : Int32 | Float32
     property height : Int32 | Float32
     property rotation : Int32 | Float32
+    property origin : Vector
 
-    def initialize(@x = 0, @y = 0, @width = 1, @height = 1, @rotation = 0, color = nil, filled = Shape::FILLED)
+    def initialize(@x = 0, @y = 0, @width = 1, @height = 1, @rotation = 0, @origin = Vector.new, color = nil, filled = Shape::FILLED)
       super(color: color, filled: filled)
     end
 
@@ -18,7 +19,7 @@ module Game
           width: width,
           height: height
         ),
-        origin: LibRay::Vector2.new,
+        origin: origin.to_struct,
         rotation: rotation,
         color: color.to_struct
       )
