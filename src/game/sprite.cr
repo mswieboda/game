@@ -178,14 +178,14 @@ class Game::Sprite
     @frame_time = frame.to_f32 / @fps
   end
 
-def draw(x, y, origin_x = nil, origin_y = nil, centered = false, rotation = 0, tint = Color::White)
+  def draw(x, y, origin_x = nil, origin_y = nil, width = width, height = height, centered = false, rotation = 0, tint = Color::White)
     LibRay.draw_texture_pro(
       texture: texture.to_struct,
       source_rec: LibRay::Rectangle.new(
-        x: col * width,
-        y: row * height,
-        width: width,
-        height: height
+        x: col * self.width,
+        y: row * self.height,
+        width: self.width,
+        height: self.height
       ),
       dest_rec: LibRay::Rectangle.new(
         x: x,
@@ -194,8 +194,8 @@ def draw(x, y, origin_x = nil, origin_y = nil, centered = false, rotation = 0, t
         height: height
       ),
       origin: LibRay::Vector2.new(
-        x: origin_x || centered ? width / 2 : 0,
-        y: origin_y || centered ? height / 2 : 0,
+        x: origin_x || centered ? self.width / 2 : 0,
+        y: origin_y || centered ? self.height / 2 : 0,
       ),
       rotation: rotation,
       tint: tint.to_struct
