@@ -1,7 +1,12 @@
 module Game
   class Image
+    getter image : LibRay::Image
+
+    delegate :width, :height, to: image
+
     @image_source : LibRay::Image
-    @image : LibRay::Image
+
+    @@images = Hash(String, Image).new
 
     def initialize(@image = LibRay::Image.new)
       @image_source = @image
@@ -22,22 +27,41 @@ module Game
     end
 
     def load(filename : String)
-      bin_dir = Process.executable_path || ""
-      last_slash_index = bin_dir.rindex('/')
-      bin_dir = bin_dir[0..last_slash_index]
-
-      filename = File.join(bin_dir, "#{filename}")
+      filename = Utils.expand_path(filename)
 
       puts "loading image: #{filename}" if Game::DEBUG
 
       @image = LibRay.load_image(filename)
       @image_source = @image
+
+      @@images[filename] = self
+
+      self
+    end
+
+    def self.get(filename)
+      filename = Utils.expand_path(filename)
+
+      puts "getting image: #{filename}" if Game::DEBUG
+
+      unless @@images.has_key?(filename)
+        @@images[filename] = load(filename)
+      end
+
+      image = @@images[filename]
+
+      puts "got image: #{filename}" if Game::DEBUG
+
+      image
+    end
+
+    def get(filename)
+      @image = Image.get(filename)
     end
 
     def unload
-      LibRay.unload_image(@image)
-      @image = LibRay::Image.new
-      @image_source = @image
+      LibRay.unload_image(@image_source)
+      LibRay.unload_image(@image) if @image != @image_source
     end
 
     def width

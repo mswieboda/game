@@ -43,12 +43,12 @@ module Game
       texture
     end
 
-    def self.get(filename)
+    def self.get(filename, image : Image)
+      filename = Utils.expand_path(filename)
+
       puts "getting texture: #{filename}" if Game::DEBUG
 
-      unless @@textures.has_key?(filename)
-        texture = load(filename)
-      end
+      @@textures[filename] = load(image) unless @@textures.has_key?(filename)
 
       texture = @@textures[filename]
 
@@ -57,8 +57,8 @@ module Game
       texture
     end
 
-    def get(filename)
-      @texture = Texture.get(filename)
+    def get(filename, image : Image)
+      @texture = Texture.get(filename, image)
     end
 
     def load(image : Image)
@@ -66,7 +66,15 @@ module Game
     end
 
     def load(filename : String)
-      @texture = LibRay.load_texture(filename)
+      filename = Utils.expand_path(filename)
+
+      puts "loading texture: #{filename}" if Game::DEBUG
+
+      texture = LibRay.load_texture(filename)
+
+      puts "loaded texture: #{filename}" if Game::DEBUG
+
+      texture
     end
 
     def unload

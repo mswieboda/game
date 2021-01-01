@@ -26,11 +26,8 @@ class Explosion < Game::SpriteEntity
 end
 
 class TexturesExample < Game::Game
-  @texture : Game::Texture
-  @texture_resized : Game::Texture
-  @image : Game::Image
-  @image_zoom : Game::Image
-  @texture_zoom : Game::Texture
+  @crystal_icon_resized : Game::Sprite
+  @crystal_icon_zoom : Game::Sprite
 
   def initialize
     super(name: "Textures Example", background_color: Game::Color::White)
@@ -38,28 +35,30 @@ class TexturesExample < Game::Game
     Game::Sprite.load({
       :explosion => {
         filename: "./assets/explosion.png",
-        width:    128,
-        height:   128,
-        loops:    false,
+        width: 128,
+        height: 128,
+        loops: false
       },
       :dust => {
-        filename:    "./assets/explosion.png",
-        width:       128,
-        height:      128,
-        loops:       true,
-        fps:         3,
+        filename: "./assets/explosion.png",
+        width: 128,
+        height: 128,
+        loops: true,
+        fps: 3,
         start_frame: 40,
-        end_frame:   48,
+        end_frame: 48,
       },
+      :crystal_icon => {
+        filename: "./assets/crystal_icon.png",
+        width: 142,
+        height: 142,
+        loops: false
+      }
     })
 
-    @image = Game::Image.load("./assets/crystal_icon.png")
-    @texture = Game::Texture.load(@image)
-
-    image_resized = @image.resize(width: 71, height: 71)
-    @image_zoom = @image.copy
-    @texture_resized = Game::Texture.load(image_resized)
-    @texture_zoom = Game::Texture.load(@image_zoom)
+    @crystal_icon = Game::Sprite.get(:crystal_icon)
+    @crystal_icon_resized = @crystal_icon.resize(width: 71, height: 71)
+    @crystal_icon_zoom = @crystal_icon.copy
 
     @explosion = Explosion.new(x: 0, y: 0)
     @dust = Game::Sprite.get(:dust)
@@ -84,11 +83,9 @@ class TexturesExample < Game::Game
     end
 
     if Game::Key::Up.down?
-      @image_zoom.resize!(@image_zoom.width + 1, @image_zoom.height + 1)
-      @texture_zoom = Game::Texture.load(@image_zoom)
-    elsif Game::Key::Down.down? && @image_zoom.width > 1 && @image_zoom.height > 1
-      @image_zoom.resize!(@image_zoom.width - 1, @image_zoom.height - 1)
-      @texture_zoom = Game::Texture.load(@image_zoom)
+      @crystal_icon_zoom.resize!(@crystal_icon_zoom.width + 1, @crystal_icon_zoom.height + 1)
+    elsif Game::Key::Down.down? && @crystal_icon_zoom.width > 1 && @crystal_icon_zoom.height > 1
+      @crystal_icon_zoom.resize!(@crystal_icon_zoom.width - 1, @crystal_icon_zoom.height - 1)
     end
   end
 
@@ -97,9 +94,9 @@ class TexturesExample < Game::Game
     @explosion.draw
     @dust.draw(x: 500, y: 500)
     @dust2.draw(x: 700, y: 700)
-    @texture.draw(x: 100, y: 100)
-    @texture_resized.draw(x: 100, y: 300)
-    @texture_zoom.draw(x: 100, y: 500)
+    @crystal_icon.draw(x: 100, y: 100)
+    @crystal_icon_resized.draw(x: 100, y: 300)
+    @crystal_icon_zoom.draw(x: 100, y: 500)
   end
 end
 

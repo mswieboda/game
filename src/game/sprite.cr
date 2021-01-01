@@ -1,4 +1,6 @@
 class Game::Sprite
+  getter filename : String
+  getter image : Image
   getter texture : Texture
   getter frame_time : Float32
   getter cols : Int32
@@ -50,12 +52,13 @@ class Game::Sprite
     {% end %}
   end
 
-  def initialize(filename : String, @width, @height, fps = FPS, loops = true, start_frame = nil, end_frame = nil)
+  def initialize(@filename : String, @width, @height, fps = FPS, loops = true, start_frame = nil, end_frame = nil)
     @texture = Texture.new
-    @texture = Texture.get(filename)
+    @image = Image.get(filename)
+    @texture = Texture.get(filename, @image)
 
-    @cols = (@texture.width / @width).to_i
-    @rows = (@texture.height / @height).to_i
+    @cols = (@image.width / @width).to_i
+    @rows = (@image.height / @height).to_i
 
     @fps = (fps || FPS).to_i
     @loops = loops.nil? ? true : !!loops
@@ -100,7 +103,7 @@ class Game::Sprite
   define_load_sprite_data
 
   def self.load(name, filename, width, height, fps = FPS, loops = true, start_frame = nil, end_frame = nil)
-    puts "sprite initializing: #{name}" if Game::DEBUG
+    puts "sprite loading: #{name}" if Game::DEBUG
 
     fps_test = (fps || FPS).to_i
 
@@ -179,6 +182,10 @@ class Game::Sprite
   end
 
   def draw(x, y, origin_x = nil, origin_y = nil, width = width, height = height, centered = false, rotation = 0, tint = Color::White)
+    if width != self.width || height != self.height
+      resize!(width: width, height: height)
+    end
+
     LibRay.draw_texture_pro(
       texture: texture.to_struct,
       source_rec: LibRay::Rectangle.new(
@@ -200,5 +207,31 @@ class Game::Sprite
       rotation: rotation,
       tint: tint.to_struct
     )
+  end
+
+  def copy : Sprite
+    sprite = Sprite.new(
+      filename: filename,
+      width: width,
+      height: height,
+      fps: fps,
+      loops: loops?,
+      start_frame: start_frame,
+      end_frame: end_frame
+    )
+  end
+
+  def resize(width, height) : Sprite
+    sprite = copy
+    sprite.resize!(width, height)
+    sprite
+  end
+
+  def resize!(width, height)
+    @width = width
+    @height = height
+
+    @image = @image.resize(width, height)
+    @texture = Texture.load(@image)
   end
 end
