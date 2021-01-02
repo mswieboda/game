@@ -71,7 +71,7 @@ Note: Since many features are currently WIP, interacting with `LibRay` directly 
   - [x] basic window: title, size, fullscreen (moving to Window)
   - [x] basic setup: FPS, audio
   - [x] basic game loop: running? frame time, update, draw wrapper, draw
-  - [ ] set drawing mode 2D/3D
+  - [x] set drawing mode 2D/3D
   - [ ] specific sprite pre loading `Game#load_sprites` method to override
   - [ ] specific sound pre loading `Game#load_sounds` method to override
 - [ ] Window
@@ -83,12 +83,12 @@ Note: Since many features are currently WIP, interacting with `LibRay` directly 
   - [x] Mouse
   - [ ] Gamepad
   - [ ] Touch
-- [ ] Camera
+- [ ] Camera for 2D
   - [ ] Viewport
 - [x] Color
-- [ ] Vectors/Position/Point
-  - [ ] Vector
-  - [ ] Vector3D
+- [x] Vectors
+  - [x] Vector
+  - [x] Vector3
 - [x] Shapes
   - [x] Shape parent class
     - [ ] collision detection
@@ -123,7 +123,9 @@ Note: Since many features are currently WIP, interacting with `LibRay` directly 
   - [x] SpriteEntity
   - [x] ShapeEntity
 - [ ] 3D
-  - [ ] Models
+  - [x] Camera
+  - [x] Model
+  - [x] Mesh
   - [ ] Shaders
 
 

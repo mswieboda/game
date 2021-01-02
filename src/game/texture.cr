@@ -28,13 +28,11 @@ module Game
     end
 
     def self.load(filename)
+      filename = Utils.expand_path(filename)
+
       puts "loading texture: #{filename}" if Game::DEBUG
 
-      bin_dir = Process.executable_path || ""
-      last_slash_index = bin_dir.rindex('/')
-      bin_dir = bin_dir[0..last_slash_index]
-
-      @@textures[filename] ||= Texture.new(File.join(bin_dir, "#{filename}"))
+      @@textures[filename] ||= Texture.new(filename)
 
       texture = @@textures[filename]
 

@@ -8,6 +8,8 @@ class Game::Game
   getter? debug : Bool
   getter? draw_fps : Bool
 
+  @@camera = Camera.new
+
   NAME = "Game"
 
   FULLSCREEN = false
@@ -131,5 +133,21 @@ class Game::Game
     end
 
     LibRay.close_window
+  end
+
+  def self.camera=(camera : Camera)
+    @@camera = camera
+  end
+
+  def self.camera
+    @@camera
+  end
+
+  def self.begin_3d
+    LibRay.begin_mode_3d(camera.to_struct)
+  end
+
+  def self.end_3d
+    LibRay.end_mode_3d
   end
 end
