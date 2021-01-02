@@ -48,8 +48,12 @@ class ShapesExample < Game::Game
     @shapes << Game::EquilateralTriangle.new(x: 725, y: 100, size: 50, filled: false)
     @shapes << Game::EquilateralTriangle.new(center_x: 750, center_y: 125, radius: 20)
 
+    @shapes << Game::RoundedRectangle.new(x: 810, y: 110, width: 30, height: 80, roundness: 0.333_f32, segments: 10)
+    @shapes << Game::RoundedRectangle.new(x: 800, y: 100, width: 50, height: 100, roundness: 0.333_f32, segments: 10, thickness: 3, filled: false)
+
     @moving_shape = Game::ShapeEntity.new(x: 300, y: 300, shape: Game::Square.new(size: 50, color: Game::Color::Purple))
     @rotating_shape = Game::Rectangle.new(x: 500, y: 500, width: 50, height: 100, color: Game::Color::Purple)
+
   end
 
   def update(frame_time)
