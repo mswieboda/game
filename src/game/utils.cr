@@ -10,4 +10,12 @@ abstract class Game::Utils
       path
     end
   end
+
+  def self.to_radians(degrees : Int32 | Float32)
+    degrees * Math::PI / 180
+  end
+
+  def self.to_degrees(radians : Int32 | Float32)
+    radians * 180 / Math::PI
+  end
 end
