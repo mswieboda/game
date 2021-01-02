@@ -91,6 +91,18 @@ module Game
       LibRay.image_resize(pointerof(@image), width, height)
     end
 
+    def flip_vertical!
+      LibRay.image_flip_vertical(pointerof(@image))
+    end
+
+    def flip_horizontal!
+      LibRay.image_flip_horizontal(pointerof(@image))
+    end
+
+    def self.from_text(text : String, font_size : Float32, spacing : Float32, color : Color, font = Font.default)
+      Image.new(LibRay.image_text_ex(font.to_struct, text, font_size, spacing, color.to_struct))
+    end
+
     def to_struct
       @image
     end

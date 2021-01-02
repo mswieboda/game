@@ -28,6 +28,7 @@ end
 class TexturesExample < Game::Game
   @crystal_icon_resized : Game::Sprite
   @crystal_icon_zoom : Game::Sprite
+  @from_text : Game::Texture
 
   def initialize
     super(name: "Textures Example", background_color: Game::Color::White)
@@ -71,6 +72,11 @@ class TexturesExample < Game::Game
       spacing: 2,
       color: Game::Color::Black
     )
+
+    image_text = Game::Image.from_text("abc123", 20, 2, Game::Color::Red)
+    image_text.flip_vertical!
+    image_text.flip_horizontal!
+    @from_text = Game::Texture.load(image_text)
   end
 
   def update(frame_time)
@@ -97,6 +103,8 @@ class TexturesExample < Game::Game
     @crystal_icon.draw(x: 100, y: 100)
     @crystal_icon_resized.draw(x: 100, y: 300)
     @crystal_icon_zoom.draw(x: 100, y: 500)
+
+    @from_text.draw(x: 300, y: 300)
   end
 end
 

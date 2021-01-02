@@ -12,11 +12,11 @@ class Game::Font
   end
 
   def self.default_font
-    @@default_font = LibRay.get_font_default
+    @@default_font ||= LibRay.get_font_default
   end
 
   def self.default
-    @@default = Font.new
+    @@default ||= Font.new
   end
 
   def load(filename : String) : LibRay::Font
