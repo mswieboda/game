@@ -3,7 +3,7 @@ class Game::Text
   property font : Font
   property x : Int32 | Float32 | Float64
   property y : Int32 | Float32 | Float64
-  property size : Int32
+  property size : Int32 | Float32
   property spacing : Int32 | Float32
   property color : Color
   getter width : Int32 | Float32
@@ -54,6 +54,21 @@ class Game::Text
       font_size: size,
       spacing: spacing,
       tint: color.to_struct
+    )
+  end
+
+  def draw(image : Image)
+    LibRay.image_draw_text_ex(
+      image.to_struct,
+      position: LibRay::Vector2.new(
+        x: x,
+        y: y
+      ),
+      font: font.to_struct,
+      text: text,
+      font_size: size,
+      spacing: spacing,
+      color: color.to_struct
     )
   end
 end

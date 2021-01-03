@@ -44,10 +44,20 @@ module Game
       filled? ? draw_filled(parent_x, parent_y) : draw_outlined(parent_x, parent_y)
     end
 
+    def draw(image : Image, parent_x = 0, parent_y = 0)
+      filled? ? draw_filled(image, parent_x, parent_y) : draw_outlined(image, parent_x, parent_y)
+    end
+
     def draw_filled(parent_x = 0, parent_y = 0)
     end
 
     def draw_outlined(parent_x = 0, parent_y = 0)
+    end
+
+    def draw_filled(image : Image, parent_x = 0, parent_y = 0)
+    end
+
+    def draw_outlined(image : Image, parent_x = 0, parent_y = 0)
     end
   end
 end

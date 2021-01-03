@@ -40,5 +40,34 @@ module Game
         color: color.to_struct
       )
     end
+
+    def draw_filled(image : Image, parent_x = 0, parent_y = 0)
+      LibRay.draw_rectangle_rounded(
+        rec: LibRay::Rectangle.new(
+          x: parent_x + x,
+          y: parent_y + y,
+          width: width,
+          height: height
+        ),
+        roundness: roundness,
+        segments: segments,
+        color: color.to_struct
+      )
+    end
+
+    def draw_outlined(image : Image, parent_x = 0, parent_y = 0)
+      LibRay.draw_rectangle_rounded_lines(
+        rec: LibRay::Rectangle.new(
+          x: parent_x + x,
+          y: parent_y + y,
+          width: width,
+          height: height
+        ),
+        roundness: roundness,
+        segments: segments,
+        line_thick: thickness,
+        color: color.to_struct
+      )
+    end
   end
 end
