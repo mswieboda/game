@@ -112,7 +112,7 @@ run_release_time_example: build_release_time_example
 
 
 # 3D
-build_three_d_example: build
+build_three_d_example: assets
 	env LIBRARY_PATH="$(PWD)/lib_ext" crystal build examples/three_d_example.cr -o build/three_d_example
 
 build_release_three_d_example: release_assets
