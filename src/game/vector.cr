@@ -14,6 +14,14 @@ module Game
       LibRay::Vector2.new(x: x, y: y)
     end
 
+    def length
+      Math.sqrt(x ** 2 + y ** 2).to_f32
+    end
+
+    def add(v : Vector) : Vector
+      self.class.new(x: x + v.x, y: y + v.y)
+    end
+
     def subtract(v : Vector) : Vector
       self.class.new(x: x - v.x, y: y - v.y)
     end
