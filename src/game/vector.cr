@@ -30,6 +30,19 @@ module Game
       self.class.new(x: x - v.x, y: y - v.y)
     end
 
+    # methods: +, -, *
+    # TODO: figure out how to do +=, -=, *=, /=
+    #       as `def +=(v)` causes syntax error
+    {% for var in [:+, :-, :*, :/] %}
+      def {{var.id}}(value : Int32 | Float32)
+        self.class.new(x: x {{var.id}} value, y: y {{var.id}} value)
+      end
+    {% end %}
+
+    def /(value : Int32 | Float32)
+      self.class.new(x: (x / value).to_f32, y: (y / value).to_f32)
+    end
+
     def dot(v : Vector)
       x * v.x + y * v.y
     end
