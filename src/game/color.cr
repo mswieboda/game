@@ -5,6 +5,9 @@ module Game
     getter blue : UInt8
     getter alpha : UInt8
 
+    # Transparent
+    Transparent = new(color: 0, alpha: 0)
+
     # Blacks
     Black = new
 
@@ -161,7 +164,7 @@ module Game
     end
 
     # red, green, blue, alpha chainable setters
-    # ex: `some_color.red(5)` returns the color with red set to 5
+    # ex: `some_color.red(5_u8)` returns the color with red set to 5
     {% for var in [:red, :green, :blue, :alpha] %}
       def {{var.id}}(value : UInt8)
         Color.new(

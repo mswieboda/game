@@ -209,6 +209,21 @@ class Game::Sprite
     )
   end
 
+  def draw(image : Image, x = 0, y = 0, origin_x = nil, origin_y = nil, width = width, height = height, centered = false, rotation = 0, tint = Color::White)
+    if width != self.width || height != self.height
+      resize!(width: width, height: height)
+    end
+
+    image.draw(
+      image: @image,
+      x: x,
+      y: y,
+      width: width,
+      height: height,
+      tint: tint
+    )
+  end
+
   def copy : Sprite
     sprite = Sprite.new(
       filename: filename,

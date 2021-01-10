@@ -18,6 +18,10 @@ module Game
       load(filename)
     end
 
+    def to_struct
+      @image
+    end
+
     def self.load(filename)
       Image.new(filename)
     end
@@ -103,8 +107,43 @@ module Game
       Image.new(LibRay.image_text_ex(font.to_struct, text, font_size, spacing, color.to_struct))
     end
 
-    def to_struct
-      @image
+    def self.from_size(width : Int32, height : Int32, color = Color::Transparent)
+      Image.new(LibRay.gen_image_color(width, height, color.to_struct))
+    end
+
+    def draw(image : Image, x, y, width = width, height = height, tint = Color::White)
+      LibRay.image_draw(
+        dst: pointerof(@image),
+        src: image.to_struct,
+        src_rec: LibRay::Rectangle.new(
+          x: 0,
+          y: 0,
+          width: self.width,
+          height: self.height
+        ),
+        dst_rec: LibRay::Rectangle.new(
+          x: x,
+          y: y,
+          width: width,
+          height: height
+        ),
+        tint: tint.to_struct
+      )
+    end
+
+    def draw_text(text, font : Font, x, y, font_size, spacing, color = Color::Black)
+      LibRay.image_draw_text_ex(
+        dst: pointerof(@image),
+        position: LibRay::Vector2.new(
+          x: x,
+          y: y
+        ),
+        font: font.to_struct,
+        text: text,
+        font_size: font_size,
+        spacing: spacing,
+        color: color.to_struct
+      )
     end
   end
 end
