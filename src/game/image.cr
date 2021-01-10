@@ -131,18 +131,18 @@ module Game
       )
     end
 
-    def draw_text(text, font : Font, x, y, font_size, spacing, color = Color::Black)
+    def draw(text : Text)
       LibRay.image_draw_text_ex(
         dst: pointerof(@image),
         position: LibRay::Vector2.new(
-          x: x,
-          y: y
+          x: text.x,
+          y: text.y
         ),
-        font: font.to_struct,
-        text: text,
-        font_size: font_size,
-        spacing: spacing,
-        color: color.to_struct
+        font: text.font.to_struct,
+        text: text.text,
+        font_size: text.size,
+        spacing: text.spacing,
+        color: text.color.to_struct
       )
     end
   end

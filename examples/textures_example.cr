@@ -82,15 +82,16 @@ class TexturesExample < Game::Game
     image_draw_to = Game::Image.from_size(100, 200, Game::Color::Red.alpha(50_u8))
 
     @crystal_icon.draw(image: image_draw_to)
-    image_draw_to.draw_text(
+
+    text = Game::Text.new(
       x: 10,
       y: 20,
       text: "123foo",
-      font: Game::Font.default,
-      font_size: 20,
+      size: 20,
       spacing: 2,
       color: Game::Color::Red
     )
+    image_draw_to.draw(text)
 
     @draw_to = Game::Texture.load(image_draw_to)
   end
