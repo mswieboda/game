@@ -209,17 +209,16 @@ class Game::Sprite
     )
   end
 
-  def draw(image : Image, x = 0, y = 0, origin_x = nil, origin_y = nil, width = width, height = height, centered = false, rotation = 0, tint = Color::White)
-    if width != self.width || height != self.height
-      resize!(width: width, height: height)
-    end
+  def draw(image : Image, x = 0, y = 0, centered = false, flip_horizontal = false, flip_vertical = false, tint = Color::White)
+    sprite_image = @image
+    sprite_image = sprite_image.flip_horizontal if flip_horizontal
+    sprite_image = sprite_image.flip_vertical if flip_vertical
 
     image.draw(
-      image: @image,
+      image: sprite_image,
       x: x,
       y: y,
-      width: width,
-      height: height,
+      centered: centered,
       tint: tint
     )
   end

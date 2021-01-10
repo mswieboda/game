@@ -95,12 +95,24 @@ module Game
       LibRay.image_resize(pointerof(@image), width, height)
     end
 
+    def flip_horizontal!
+      LibRay.image_flip_horizontal(pointerof(@image))
+    end
+
+    def flip_horizontal
+      image = copy
+      image.flip_horizontal!
+      image
+    end
+
     def flip_vertical!
       LibRay.image_flip_vertical(pointerof(@image))
     end
 
-    def flip_horizontal!
-      LibRay.image_flip_horizontal(pointerof(@image))
+    def flip_vertical
+      image = copy
+      image.flip_vertical!
+      image
     end
 
     def self.from_text(text : String, font_size : Float32, spacing : Float32, color : Color, font = Font.default)
@@ -111,21 +123,21 @@ module Game
       Image.new(LibRay.gen_image_color(width, height, color.to_struct))
     end
 
-    def draw(image : Image, x, y, width = width, height = height, tint = Color::White)
+    def draw(image : Image, x, y, centered = false, tint = Color::White)
       LibRay.image_draw(
         dst: pointerof(@image),
         src: image.to_struct,
         src_rec: LibRay::Rectangle.new(
           x: 0,
           y: 0,
-          width: self.width,
-          height: self.height
+          width: image.width,
+          height: image.height
         ),
         dst_rec: LibRay::Rectangle.new(
-          x: x,
-          y: y,
-          width: width,
-          height: height
+          x: centered ? x - image.width / 2_f32 : x,
+          y: centered ? y - image.height / 2_f32 : y,
+          width: image.width,
+          height: image.height
         ),
         tint: tint.to_struct
       )
