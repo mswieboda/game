@@ -52,6 +52,11 @@ module Game
       LibRay.set_mouse_position(x, y)
     end
 
+    def self.in?(x : Int32 | Float32, y : Int32 | Float32, width : Int32 | Float32, height : Int32 | Float32)
+      self.x >= x && self.x <= x + width &&
+        self.y >= y && self.y <= y + height
+    end
+
     def self.wheel
       LibRay.get_mouse_wheel_move
     end

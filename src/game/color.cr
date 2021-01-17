@@ -151,7 +151,7 @@ module Game
     end
 
     def dup
-      new(red: red, blue: blue, green: green, alpha: alpha)
+      self.class.new(red: red, blue: blue, green: green, alpha: alpha)
     end
 
     def to_s(io : IO)
@@ -163,20 +163,29 @@ module Game
       io << ">"
     end
 
-    # red, green, blue, alpha chainable setters
+    # red, green, blue, alpha chainable methods
     # ex: `some_color.red(5_u8)` returns the color with red set to 5
+    # ex: `some_color.add_red(5_u8)` returns the color with 5 red added
     {% for var in [:red, :green, :blue, :alpha] %}
       def {{var.id}}(value : UInt8)
         Color.new(
           red: {{var}} == :red ? value : red,
           blue: {{var}} == :blue ? value : blue,
           green: {{var}} == :green ? value : green,
-          alpha: {{var}} == :alpha ? value : alpha,
+          alpha: {{var}} == :alpha ? value : alpha
         )
       end
 
+      def add_{{var.id}}(value : UInt8)
+        {{var.id}}((value.to_u16 + {{var.id}}).clamp(UInt8::MIN, UInt8::MAX).to_u8)
+      end
+
       def {{var.id}}(percent : Float32 | Float64)
-        {{var.id}}((percent * 255).to_u8)
+        {{var.id}}((percent * 255).clamp(UInt8::MIN, UInt8::MAX).to_u8)
+      end
+
+      def add_{{var.id}}(percent : Float32 | Float64)
+        add_{{var.id}}((percent * 255).clamp(UInt8::MIN, UInt8::MAX).to_u8)
       end
     {% end %}
   end
