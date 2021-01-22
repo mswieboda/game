@@ -223,7 +223,7 @@ class Game::Sprite
     )
   end
 
-  def copy : Sprite
+  def clone : Sprite
     sprite = Sprite.new(
       filename: filename,
       width: width,
@@ -236,7 +236,7 @@ class Game::Sprite
   end
 
   def resize(width, height) : Sprite
-    sprite = copy
+    sprite = clone
     sprite.resize!(width, height)
     sprite
   end

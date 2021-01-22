@@ -18,7 +18,7 @@ module Game
       Math.sqrt(x ** 2 + y ** 2).to_f32
     end
 
-    def copy
+    def clone
       self.class.new(x: x, y: y)
     end
 

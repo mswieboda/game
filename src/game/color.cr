@@ -150,7 +150,7 @@ module Game
       )
     end
 
-    def dup
+    def clone
       self.class.new(red: red, blue: blue, green: green, alpha: alpha)
     end
 

@@ -60,7 +60,7 @@ class TexturesExample < Game::Game
 
     @crystal_icon = Game::Sprite.get(:crystal_icon)
     @crystal_icon_resized = @crystal_icon.resize(width: 71, height: 71)
-    @crystal_icon_zoom = @crystal_icon.copy
+    @crystal_icon_zoom = @crystal_icon.clone
 
     @explosion = Explosion.new(x: 0, y: 0)
     @dust = Game::Sprite.get(:dust)

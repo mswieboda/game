@@ -76,14 +76,14 @@ module Game
       @image.height
     end
 
-    def copy(resize = true)
+    def clone(resize = true)
       image = Image.new(LibRay.image_copy(@image_source))
       image.resize!(@image.width, @image.height) if resize
       image
     end
 
     def resize(width : Int32, height : Int32) : Image
-      image = copy(resize: false)
+      image = clone(resize: false)
       image.resize!(width, height)
       image
     end
@@ -100,7 +100,7 @@ module Game
     end
 
     def flip_horizontal
-      image = copy
+      image = clone
       image.flip_horizontal!
       image
     end
@@ -110,7 +110,7 @@ module Game
     end
 
     def flip_vertical
-      image = copy
+      image = clone
       image.flip_vertical!
       image
     end
