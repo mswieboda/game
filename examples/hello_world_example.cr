@@ -8,7 +8,7 @@ class HelloWorldExample < Game::Game
       text: "hello world",
       size: 30,
       spacing: 10,
-      color: Game::Color::Red
+      color: Game::Color::Lime
     )
   end
 
