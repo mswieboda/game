@@ -23,24 +23,32 @@ module Game
     end
 
     def add(v : Vector) : Vector
-      self.class.new(x: x + v.x, y: y + v.y)
+      self + v
     end
 
     def subtract(v : Vector) : Vector
-      self.class.new(x: x - v.x, y: y - v.y)
+      self - v
     end
 
     # methods: +, -, *
-    # TODO: figure out how to do +=, -=, *=, /=
+    # TODO: figure out how to do +=, -=, *=
     #       as `def +=(v)` causes syntax error
-    {% for var in [:+, :-, :*, :/] %}
+    {% for var in [:+, :-, :*] %}
       def {{var.id}}(value : Int32 | Float32)
         self.class.new(x: x {{var.id}} value, y: y {{var.id}} value)
+      end
+
+      def {{var.id}}(v : Vector)
+        self.class.new(x: x {{var.id}} v.x, y: y {{var.id}} v.y)
       end
     {% end %}
 
     def /(value : Int32 | Float32)
       self.class.new(x: (x / value).to_f32, y: (y / value).to_f32)
+    end
+
+    def /(v : Vector)
+      self.class.new(x: (x / v.x).to_f32, y: (y / v.y).to_f32)
     end
 
     def dot(v : Vector)
