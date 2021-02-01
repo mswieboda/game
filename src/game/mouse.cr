@@ -44,6 +44,10 @@ module Game
       LibRay.get_mouse_y
     end
 
+    def self.position
+      Vector.new(x: x, y: y)
+    end
+
     def self.x=(x)
       LibRay.set_mouse_position(x, y)
     end
