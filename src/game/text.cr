@@ -9,7 +9,7 @@ class Game::Text
   getter width : Int32 | Float32
   getter height : Int32 | Float32
 
-  def initialize(@text, @font = Font.default, @x = 0, @y = 0, @size = 16, @spacing = 1, @color = Color::Red)
+  def initialize(@text = "", @font = Font.default, @x = 0, @y = 0, @size = 16, @spacing = 1, @color = Color::Red)
     @width = 0
     @height = 0
 
