@@ -2,7 +2,7 @@ require "../src/game"
 
 class HelloWorldExample < Game::Game
   def initialize
-    super(name: "Hello World Example")
+    super(name: "Hello World Example", screen_width: 1024, screen_height: 768)
 
     @text = Game::Text.new(
       text: "hello world",

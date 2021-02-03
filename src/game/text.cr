@@ -1,5 +1,5 @@
 class Game::Text
-  property text : String
+  getter text : String
   property font : Font
   property x : Int32 | Float32 | Float64
   property y : Int32 | Float32 | Float64
@@ -26,6 +26,11 @@ class Game::Text
 
     @width = measure.x
     @height = measure.y
+  end
+
+  def text=(text : String)
+    @text = text
+    measure
   end
 
   def font=(font : Font)
