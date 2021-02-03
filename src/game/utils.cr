@@ -5,9 +5,9 @@ abstract class Game::Utils
       last_slash_index = exec_path.rindex('/')
       exec_path = exec_path[0..last_slash_index]
 
-      path = File.join(exec_path, "#{path}")
+      Path[exec_path].join(path).normalize.to_s
     else
-      path
+      Path[path].normalize.to_s
     end
   end
 
