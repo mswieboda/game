@@ -5,28 +5,21 @@ class Game::Game
   getter? fullscreen : Bool
   getter? resizeable : Bool
   getter? audio : Bool
-  getter? debug : Bool
   getter? draw_fps : Bool
 
   @@camera = Camera.new
 
   NAME = "Game"
-
   FULLSCREEN = false
-
   SCREEN_WIDTH  = 1280
   SCREEN_HEIGHT =  768
-
   BACKGROUND_COLOR = Color::Black
-
   TARGET_FPS = 60
-
   RESIZEABLE = false
   AUDIO      = false
-
   DEBUG = false
-
   DRAW_FPS = false
+  EXIT_WITH_ESC = true
 
   def initialize(
     @name = NAME,
@@ -37,11 +30,12 @@ class Game::Game
     @background_color = BACKGROUND_COLOR,
     @resizeable = RESIZEABLE,
     @audio = AUDIO,
-    @debug = DEBUG,
-    @draw_fps = DRAW_FPS
+    @draw_fps = DRAW_FPS,
+    exit_with_esc = EXIT_WITH_ESC
   )
     LibRay.set_config_flags(LibRay::FLAG_WINDOW_RESIZABLE) if resizeable?
     LibRay.init_window(screen_width || SCREEN_WIDTH, screen_height || SCREEN_HEIGHT, name)
+    LibRay.set_exit_key(-1) unless exit_with_esc
 
     unless screen_height && screen_width
       width = LibRay.get_monitor_width(0)
