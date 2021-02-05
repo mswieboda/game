@@ -1,4 +1,5 @@
 class Game::Sprite
+  getter name : String
   getter filename : String
   getter image : Image
   getter texture : Texture
@@ -52,7 +53,7 @@ class Game::Sprite
     {% end %}
   end
 
-  def initialize(@filename : String, @width, @height, fps = FPS, loops = true, start_frame = nil, end_frame = nil)
+  def initialize(@name : String, @filename : String, @width, @height, fps = FPS, loops = true, start_frame = nil, end_frame = nil)
     @texture = Texture.new
     @image = Image.get(filename)
     @texture = Texture.get(filename, @image)
@@ -85,6 +86,7 @@ class Game::Sprite
     puts "got sprite data: #{name}" if Game::DEBUG
 
     sprite = Sprite.new(
+      name: name.to_s,
       filename: sprite_data[:filename],
       width: sprite_data[:width],
       height: sprite_data[:height],
@@ -225,6 +227,7 @@ class Game::Sprite
 
   def clone : Sprite
     sprite = Sprite.new(
+      name: name,
       filename: filename,
       width: width,
       height: height,
