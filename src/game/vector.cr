@@ -1,10 +1,14 @@
+require "json"
+
 module Game
   class Vector
+    include JSON::Serializable
+
     property x : Int32 | Float32
     property y : Int32 | Float32
 
     def self.zero
-      Vector.new
+      new
     end
 
     def initialize(@x = 0, @y = 0)
